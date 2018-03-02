@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import H1 from '../../components/H1'
-//import UnionenVideoSrc from 'unionen_compressed.mp4'
+import UnionenVideoSrc from './unionen_compressed.mp4'
 
 const HeroVideo = styled.section`
   video {
@@ -29,7 +29,7 @@ const src2 = "http://thenewcode.com/assets/videos/polina.mp4";
 export default () => (
   <HeroVideo>
     <video poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg" id="bgvid" playsInline autoPlay muted loop>
-      <source src={src2} type="video/mp4" />
+      <source src={UnionenVideoSrc} type="video/mp4" />
     </video>
     <div>
       <H1>Kompetens ger kraft.<br />Fler och bättre jobb.<br />Balans i arbetslivet.</H1>
