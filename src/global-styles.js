@@ -12,4 +12,12 @@ injectGlobal`
   body {
     font-family: 'Karla', sans-serif;
   }
+
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
 `;

@@ -7,6 +7,7 @@ const H1 = styled.h1`
   letter-spacing: -1.14px;
   line-height: 1em;
   color: #fff;
+  margin: 0;
 `;
 
 export default H1;

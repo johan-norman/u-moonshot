@@ -10,10 +10,14 @@ import {
 } from '../../modules/counter'
 
 import HeroVideoModule from '../../modules/HeroVideoModule'
+import IntroSection from './IntroSection.js'
+import ProfileSection from './ProfileSection.js'
 
 const Home = props => (
   <section>
     <HeroVideoModule />
+    <IntroSection />
+    <ProfileSection />
   </section>
 )
 
