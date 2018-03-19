@@ -7,6 +7,8 @@ injectGlobal`
   body, html {
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
   }
 
   body {

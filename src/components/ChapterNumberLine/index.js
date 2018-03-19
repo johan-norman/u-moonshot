@@ -10,6 +10,7 @@ const Container = styled.div`
   position: absolute;
   left: -50px;
   top: 168px;
+  z-index: 10;
 `;
 
 const TextContainer = styled.div`
