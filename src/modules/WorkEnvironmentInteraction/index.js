@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Charming from 'react-charming'
 import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled'
+import H2 from '../../components/H2'
 
 class WorkEnvironmentInteraction extends React.Component{
 
@@ -15,9 +16,12 @@ class WorkEnvironmentInteraction extends React.Component{
 
   render() {
     return(
-      <div>
+      <Flex>
+        <div>
+        <H2>Vad passar in på<br/>din arbetsplats?</H2>
+        </div>
 
-      </div>
+      </Flex>
     )
   }
 }

@@ -5,6 +5,7 @@ import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled'
 import H2 from '../../components/H2'
 import H3 from '../../components/H3'
+import Slider from 'react-rangeslider';
 
 const ModuleContainer = styled.section`
 min-height: 500px;
@@ -84,17 +85,25 @@ const SentenceFormContainer = styled.section`
         	transform: translateY(-50%) scale(1);
         	transition: visibility 0s 0s, opacity 0.3s, transform 0.3s;
         }
+
+        .sf-slider-container {
+          visibility: visible;
+        	opacity: 1;
+        	transform: translateY(-50%) scale(1);
+        	transition: visibility 0s 0s, opacity 0.3s, transform 0.3s;
+        }
+
     }
 
   }
 
-  .sf-field ul {
+  .sf-field ul, .sf-field .sf-slider-container {
     list-style: none;
   	margin: 0;
   	padding: 0;
     position: absolute;
     visibility: hidden;
-    background: #76C3BD;
+    background: #484848;
     left: -0.5em;
     top: 50%;
     font-size: 80%;
@@ -103,27 +112,48 @@ const SentenceFormContainer = styled.section`
     transition: visibility 0s 0.3s, opacity 0.3s, transform 0.3s;
   }
 
+  .sf-field ul {
+    max-height: 400px;
+    overflow: auto;
+  }
+
   .sf-field ul li {
   	color: #fff;
   	position: relative;
+    transition: visibility 0s 0.3s, opacity 0.3s, transform 0.3s;
+    opacity: 0.5;
   }
 
   .sf-dd ul li {
   	padding: 0 1.5em 0 0.5em;
   	cursor: pointer;
   	white-space: nowrap;
+
+    font-size: 70%;
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.7em;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .sf-dd ul li.sf-dd-checked {
-  	color: #478982;
+  	color: #fff;
+    opacity: 1;
   }
 
   .sf-slider .sf-slider-container {
-    display: none;
-  }
-
-  .sf-slider-container {
-    display: none;
+    padding: 0 1.5em 0 0.5em;
+    .value {
+      font-size: 70%;
+      font-family: 'Karla', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.7em;
+    }
   }
 
   .sf-overlay {
@@ -149,8 +179,301 @@ const SentenceFormContainer = styled.section`
 
 `;
 
-const WorkTitles = [
+const RangeSlider = styled.section`
+.rangeslider {
+    margin: 20px 0;
+    position: relative;
+    background: #e6e6e6;
+    -ms-touch-action: none;
+    touch-action: none;
+}
 
+.rangeslider,
+.rangeslider .rangeslider__fill {
+    display: block;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .4)
+}
+
+.rangeslider .rangeslider__handle {
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 -1px 3px rgba(0, 0, 0, .4)
+}
+
+.rangeslider .rangeslider__handle .rangeslider__active {
+    opacity: 1
+}
+
+.rangeslider .rangeslider__handle-tooltip {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    font-weight: 400;
+    font-size: 14px;
+    transition: all .1s ease-in;
+    border-radius: 4px;
+    display: inline-block;
+    color: #fff;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0)
+}
+
+.rangeslider .rangeslider__handle-tooltip span {
+    margin-top: 12px;
+    display: inline-block;
+    line-height: 100%
+}
+
+.rangeslider .rangeslider__handle-tooltip:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0
+}
+
+.rangeslider-horizontal {
+    height: 12px;
+    border-radius: 10px
+}
+
+.rangeslider-horizontal .rangeslider__fill {
+    height: 100%;
+    background-color: #1FA22E;
+    border-radius: 10px;
+    top: 0
+}
+
+.rangeslider-horizontal .rangeslider__handle {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0)
+}
+
+.rangeslider-horizontal .rangeslider__handle:after {
+    content: ' ';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 6px;
+    left: 6px;
+    border-radius: 50%;
+    background-color: #dadada;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .4) inset, 0 -1px 3px rgba(0, 0, 0, .4) inset
+}
+
+.rangeslider-horizontal .rangeslider__handle-tooltip {
+    top: -55px
+}
+
+.rangeslider-horizontal .rangeslider__handle-tooltip:after {
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(0, 0, 0, .8);
+    left: 50%;
+    bottom: -8px;
+    transform: translate3d(-50%, 0, 0)
+}
+
+.rangeslider-vertical {
+    margin: 20px auto;
+    height: 150px;
+    max-width: 10px;
+    background-color: transparent
+}
+
+.rangeslider-vertical .rangeslider__fill,
+.rangeslider-vertical .rangeslider__handle {
+    position: absolute
+}
+
+.rangeslider-vertical .rangeslider__fill {
+    width: 100%;
+    background-color: #7cb342;
+    box-shadow: none;
+    bottom: 0
+}
+
+.rangeslider-vertical .rangeslider__handle {
+    width: 30px;
+    height: 10px;
+    left: -10px;
+    box-shadow: none
+}
+
+.rangeslider-vertical .rangeslider__handle-tooltip {
+    left: -100%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0)
+}
+
+.rangeslider-vertical .rangeslider__handle-tooltip:after {
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid rgba(0, 0, 0, .8);
+    left: 100%;
+    top: 12px
+}
+
+.rangeslider-reverse.rangeslider-horizontal .rangeslider__fill {
+    right: 0
+}
+
+.rangeslider-reverse.rangeslider-vertical .rangeslider__fill {
+    top: 0;
+    bottom: inherit
+}
+
+.rangeslider__labels {
+    position: relative
+}
+
+.rangeslider-vertical .rangeslider__labels {
+    position: relative;
+    list-style-type: none;
+    margin: 0 0 0 24px;
+    padding: 0;
+    text-align: left;
+    width: 250px;
+    height: 100%;
+    left: 10px
+}
+
+.rangeslider-vertical .rangeslider__labels .rangeslider__label-item {
+    position: absolute;
+    transform: translate3d(0, -50%, 0)
+}
+
+.rangeslider-vertical .rangeslider__labels .rangeslider__label-item::before {
+    content: '';
+    width: 10px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1
+}
+
+.rangeslider__labels .rangeslider__label-item {
+    position: absolute;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+    top: 10px;
+    transform: translate3d(-50%, 0, 0)
+}
+`;
+
+const WorkTitles = [
+  "Administratör",
+  "Annonssäljare",
+  "Apotekare",
+  "Apoteksassistent",
+  "Apotekschef",
+  "Apotekstekniker",
+  "Applikationsspecialist",
+  "Art Director",
+  "Besiktningstekniker (fordon)",
+  "Beställare",
+  "Butikschef (avdelningschef)",
+  "CAD-ritare",
+  "Controller",
+  "Copywriter",
+  "Drift- och underhållschef",
+  "Drifttekniker IT",
+  "Ekonom",
+  "Ekonomiassistent",
+  "Ekonomichef",
+  "Fastighetsförvaltare",
+  "Fastighetsmäklare",
+  "Försäljningschef",
+  "Grafisk formgivare/originalare",
+  "Gruppchef",
+  "Handläggare",
+  "Hotellchef",
+  "HR-chef",
+  "HR-specialist",
+  "Industridesigner",
+  "Informationschef",
+  "Informatör (kommunikatör)",
+  "Ingenjör (tekniker)",
+  "Inkassohandläggare",
+  "Inköpare",
+  "Inköps- och orderassistent",
+  "Inköpschef",
+  "Innesäljare",
+  "Interaktionsdesigner",
+  "IT-arkitekt",
+  "IT-chef",
+  "Jobbcoach",
+  "Key account manager",
+  "Kökschef",
+  "Kommunikationschef",
+  "Konstruktör (ingenjör)",
+  "Kundtjänst",
+  "Kundtjänst/Support (IT)",
+  "Kvalitets- och miljöansvarig",
+  "Kvalitets- och Miljöchef",
+  "Kvalitetstekniker",
+  "Laboratorieassistent",
+  "Laboratorieingenjör",
+  "Lager- och logistikchef",
+  "Logistiker",
+  "Löneadministratör",
+  "Marknadsanalytiker",
+  "Marknadsassistent",
+  "Marknadschef",
+  "Marknadsförare",
+  "Marknadskoordinator",
+  "Material- och produktionsplanerare",
+  "Nätverkstekniker",
+  "Orderbehandlare",
+  "Personalchef",
+  "Personalhandläggare",
+  "Platschef (kontorchef, filialchef)",
+  "Produktchef IT",
+  "Produktionschef",
+  "Produktionsledare",
+  "Projektledare",
+  "Projektledare IT (mindre)",
+  "Projektledare IT (multipla)",
+  "Receptarie",
+  "Receptionist (kontor)",
+  "Redovisningsekonom",
+  "Resebyråchef",
+  "Resesäljare",
+  "Restaurangchef",
+  "Revisor (extern)",
+  "Revisorassistent (extern)",
+  "Säkerhetschef",
+  "Säljare",
+  "Sekreterare (assistent)",
+  "Serviceingenjör (tekniker)",
+  "Speditör",
+  "Supporttekniker IT",
+  "Systemtestare IT",
+  "Systemutvecklare",
+  "Tandhygienist",
+  "Tandsköterska",
+  "Tandtekniker",
+  "Teknikinformatör",
+  "Telefonist",
+  "Testledare (IT)",
+  "Trafiklärare",
+  "Transportplanerare",
+  "Vaktmästare, kontorsservice",
+  "Webbansvarig",
+  "Webbredaktör",
+  "Webbutvecklare (Webbdesigner)",
+  "Mitt yrke saknas på listan"
 ];
 
 class CareerInteraction extends React.Component{
@@ -164,7 +487,10 @@ class CareerInteraction extends React.Component{
     this.state = {
       showWorkDropdown: false,
       showSalaryDropdown: false,
-      showExperienceDropdown: false
+      showExperienceDropdown: false,
+      salaryValue: 35000,
+      workTitle: "Systemutvecklare",
+      experienceValue: 6
     };
   }
 
@@ -194,11 +520,60 @@ class CareerInteraction extends React.Component{
     });
   }
 
+  changeWorkTitle = itemValue => {
+    console.log(itemValue);
+    this.setState({
+      workTitle: itemValue
+    })
+    this.closeAllDropdowns();
+  };
+
+  // SALARY SLIDER
+  handleSalaryChangeStart = () => {
+    console.log('Change event started')
+  };
+
+  handleSalaryChange = salaryValue => {
+    this.setState({
+      salaryValue: salaryValue
+    })
+  };
+
+  handleSalaryChangeComplete = () => {
+    console.log('Change event completed')
+  };
+
+  // EXPERIENCE SLIDER
+  handleExperienceChangeStart = () => {
+    console.log('Change event handleExperienceChangeStart')
+  };
+
+  handleExperienceChange = experienceValue => {
+    this.setState({
+      experienceValue: experienceValue
+    })
+  };
+
+  handleExperienceChangeComplete = () => {
+    console.log('Change event completed')
+  };
+
   componentDidMount() {
       console.log(this.state);
   }
 
   render() {
+
+    const salaryValue = this.state.salaryValue;
+    const experienceValue = this.state.experienceValue;
+    const renderWorkTitles = WorkTitles.map((worktitle, index) => {
+      return (
+          <li key={worktitle + index} onClick={this.changeWorkTitle.bind(this, worktitle)}>
+            {worktitle}
+          </li>
+      );
+    })
+
     return(
       <div className="profile-section-container">
         <ModuleContainer>
@@ -216,25 +591,51 @@ class CareerInteraction extends React.Component{
               <SentenceFormContainer>
                 Jag jobbar som&nbsp;
                   <div className={"sf-field sf-dd " + (this.state.showWorkDropdown ? 'sf-field-open' : '')}>
-          	        <a className="sf-field-toggle" onClick={this.toggleWorkDropdown.bind(this)}>Systemutvecklare</a>
+          	        <a className="sf-field-toggle" onClick={this.toggleWorkDropdown.bind(this)}>{this.state.workTitle}</a>
             	      <ul>
-                  		<li className="sf-dd-checked">Systemutvecklare</li>
-                  		<li>Systemutvecklare 1</li>
-                  		<li>Systemutvecklare 2</li>
-                  		<li>Systemutvecklare 3</li>
-                  		<li>Systemutvecklare 4</li>
+                  		{renderWorkTitles}
                   	</ul>
                   </div>,
                   <br/>jag tjänar&nbsp;
                   <div className={"sf-field sf-slider " + (this.state.showSalaryDropdown ? 'sf-field-open' : '')}>
-          	        <a className="sf-field-toggle" onClick={this.toggleSalaryDropdown.bind(this)}>35 000 kr</a>
+          	        <a className="sf-field-toggle" onClick={this.toggleSalaryDropdown.bind(this)}>{this.state.salaryValue} kr</a>
             	      <div className="sf-slider-container">
+
+                      <RangeSlider>
+                        <div className='slider'>
+                          <Slider
+                            min={0}
+                            max={99999}
+                            step={1000}
+                            value={salaryValue}
+                            onChangeStart={this.handleSalaryChangeStart}
+                            onChange={this.handleSalaryChange}
+                            onChangeComplete={this.handleSalaryChangeComplete}
+                          />
+                          <div className='value'>Din lön: {salaryValue} kr</div>
+                        </div>
+                      </RangeSlider>
 
                     </div>
                   </div> och har&nbsp;
                   <div className={"sf-field sf-slider " + (this.state.showExperienceDropdown ? 'sf-field-open' : '')}>
-          	        <a className="sf-field-toggle" onClick={this.toggleExperienceDropdown.bind(this)}>6 års</a>
+          	        <a className="sf-field-toggle" onClick={this.toggleExperienceDropdown.bind(this)}>{this.state.experienceValue} års</a>
             	      <div className="sf-slider-container">
+
+                      <RangeSlider>
+                        <div className='slider'>
+                          <Slider
+                            min={0}
+                            max={50}
+                            step={1}
+                            value={experienceValue}
+                            onChangeStart={this.handleExperienceChangeStart}
+                            onChange={this.handleExperienceChange}
+                            onChangeComplete={this.handleExperienceChangeComplete}
+                          />
+                          <div className='value'>Erfarenhet: {experienceValue} år</div>
+                        </div>
+                      </RangeSlider>
 
                     </div>
                   </div> erfarenhet i yrket.
