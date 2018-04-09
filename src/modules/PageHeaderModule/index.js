@@ -51,8 +51,8 @@ class PageHeaderModule extends React.Component{
       <HeaderContainer>
         <Link className="logo-link" to="/"><img src={Logo} className="u-logo" /></Link>
         <NavigationContainer>
-          <Link to="/">Start</Link>
-          <Link to="/about-us">Annan sida</Link>
+          <Link to="/bli-medlem">Bli medlem</Link>
+          <Link to="/profil">Min profil</Link>
         </NavigationContainer>
       </HeaderContainer>
 

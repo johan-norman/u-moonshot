@@ -4,8 +4,10 @@ import H2 from '../../components/H2'
 import H3 from '../../components/H3'
 import ChapterNumberLine from '../../components/ChapterNumberLine'
 import { TimelineMax, TweenMax, Elastic } from 'gsap';
-import { Flex, Box } from 'grid-styled'
-import Card from '../../components/Card'
+import { Flex, Box } from 'grid-styled';
+import Card from '../../components/Card';
+import { SalaryHorizontal, TimeHorizontal } from '../../components/ValueSliders';
+import Tags from '../../components/Tags';
 
 const ModuleContainer = styled.section`
   min-height: 500px;
@@ -71,6 +73,15 @@ const ProfileCardsContainer = styled.section`
   z-index: 5;
 `;
 
+const Button = styled.button`
+  border-radius: 2px;
+  padding: 1em 2em;
+  margin: 0 1em;
+  background: transparent;
+  color: #000000;
+  border: 2px solid #000000;
+`;
+
 class ProfileSection extends React.Component{
 
   constructor(props){
@@ -129,6 +140,44 @@ class ProfileSection extends React.Component{
             </Box>
           </Flex>
         </ProfileCardsContainer>
+
+        <ModuleContainer>
+        <ChapterNumberLine sectionnumber="02" sectiontitle="Skapa profil" />
+          <Flex mt={-60}>
+            <Box width={1/2} m={50}>
+              <H2>
+                Berätta mer om dig.
+              </H2>
+              <SecondaryText>
+                Du kan alltid spara och utveckla din profil för ett mer personligt bemötande Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Nam posuere quis lacus ut malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
+              </SecondaryText>
+            </Box>
+            <Box width={1/2} m={50}>
+              <Button>Logga in med din profil</Button>
+              <Button>Spara profil</Button>
+            </Box>
+          </Flex>
+
+          <Flex>
+            <Box width={1/2} m={50}>
+              <H3>
+                Lorem ipsum dolor sit amet?
+              </H3>
+
+              <SalaryHorizontal />
+              <TimeHorizontal />
+               <br/>
+               <br/>
+              Lorem ipsum dolor sit amet? <br/>
+              <Tags />
+            </Box>
+
+            <Box width={1/2} m={50}>
+              Rekommenderas för dig: <br/>
+              2x2 imagecards
+            </Box>
+          </Flex>
+        </ModuleContainer>
 
       </div>
     )

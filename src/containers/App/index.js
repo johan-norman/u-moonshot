@@ -1,7 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
+
 import Home from '../HomePage'
-import About from '../AboutPage'
+import Career from '../CareerPage'
+import WorkEnvironment from '../WorkEnvironmentPage'
+import Elected from '../ElectedPage'
+import BecomeMember from '../BecomeMemberPage'
+import Profile from '../ProfilePage'
+
 import PageHeaderModule from '../../modules/PageHeaderModule'
 
 const App = () => (
@@ -9,7 +15,11 @@ const App = () => (
     <PageHeaderModule />
     <main>
       <Route exact path="/" component={Home} />
-      <Route exact path="/about-us" component={About} />
+      <Route exact path="/karriar" component={Career} />
+      <Route exact path="/arbetsmiljo" component={WorkEnvironment} />
+      <Route exact path="/fortroendevald" component={Elected} />
+      <Route exact path="/bli-medlem" component={BecomeMember} />
+      <Route exact path="/profil" component={Profile} />
     </main>
   </div>
 )

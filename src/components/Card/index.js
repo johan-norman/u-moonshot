@@ -68,6 +68,10 @@ const CardContainer = styled.div`
     margin-top: 10px;
   }
 
+  .article-card-cointainer {
+
+  }
+
 `;
 
 const imageArr = [CardImage1, CardImage2, CardImage3, CardImage4];
@@ -100,6 +104,20 @@ const QuoteCard = (props) => (
   </CardContainer>
 )
 
+const ArticleCard = (props) => (
+  <CardContainer className="article-card-container">
+    <Link to="/about-us" className="card-link">
+        <div className="card-image-container">
+          <img src={randomImage} />
+        </div>
+        <div className="card-text-container">
+          <h3>{props.title}</h3>
+          <p>{props.bodytext}.</p>
+        </div>
+    </Link>
+  </CardContainer>
+)
+
 class Card extends React.Component{
 
   constructor(props){
@@ -114,6 +132,7 @@ class Card extends React.Component{
       <div>
         <ImageCard title={this.props.title} bodytext={this.props.bodytext} />
         {/* <QuoteCard quote={this.props.quote} author={this.props.author} /> */ }
+        {/* <ArticleCard title={this.props.title} bodytext={this.props.bodytext} /> */ }
       </div>
     )
   }
