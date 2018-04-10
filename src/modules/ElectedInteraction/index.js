@@ -57,7 +57,8 @@ const Preamble = styled.p`
   color: #383838;
   letter-spacing: 0;
   line-height: 24px;
-  max-width: 400px;
+  max-width: 500px;
+  margin-bottom: 30px;
 `;
 
 const RangeSlider = styled.section`
@@ -115,16 +116,23 @@ clear: both;
 .rangeslider,
 .rangeslider .rangeslider__fill {
     display: block;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .4)
 }
 
 .rangeslider .rangeslider__handle {
     background: #fff;
-    border: 1px solid #ccc;
-    cursor: pointer;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
     display: inline-block;
     position: absolute;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 -1px 3px rgba(0, 0, 0, .4)
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.2);
+
+    &:active {
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
 }
 
 .rangeslider .rangeslider__handle .rangeslider__active {
@@ -161,8 +169,7 @@ clear: both;
 }
 
 .rangeslider-horizontal {
-    height: 12px;
-    border-radius: 10px
+    height: 3px;
 }
 
 .rangeslider-horizontal .rangeslider__fill {
@@ -173,23 +180,31 @@ clear: both;
 }
 
 .rangeslider-horizontal .rangeslider__handle {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
+    width: 26px;
+    height: 26px;
+    border-radius: 22px;
     top: 50%;
-    transform: translate3d(-50%, -50%, 0)
-}
+    transform: translate3d(-50%, -50%, 0);
+    outline: 0;
+    transition: all 25ms ease-in-out;
 
-.rangeslider-horizontal .rangeslider__handle:after {
-    content: ' ';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 6px;
-    left: 6px;
-    border-radius: 50%;
-    background-color: #dadada;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .4) inset, 0 -1px 3px rgba(0, 0, 0, .4) inset
+    &:after {
+      content: ' ';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      top: 7px;
+      left: 7px;
+      border-radius: 50%;
+      background-color: #A9A9A9;
+    }
+
+    &:focus {
+      &:after {
+        background-color: green;
+      }
+    }
+
 }
 
 .rangeslider-horizontal .rangeslider__handle-tooltip {
@@ -424,7 +439,7 @@ class ElectedInteraction extends React.Component{
       <Container>
 
         <Flex pb={100}>
-          <Box width={1/2} pr={130}>
+          <Box width={1/2} pr={100}>
             <H2>Vad brinner<br/>du för?</H2>
             <Preamble>Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.</Preamble>
 
@@ -440,6 +455,7 @@ class ElectedInteraction extends React.Component{
                     min={0}
                     max={10}
                     step={1}
+                    tooltip={false}
                     value={workEnvironmentValue}
                     onChangeStart={this.handleWorkEnvironmentChangeStart}
                     onChange={this.handleWorkEnvironmentChange}
@@ -462,6 +478,7 @@ class ElectedInteraction extends React.Component{
                     min={0}
                     max={10}
                     step={1}
+                    tooltip={false}
                     value={equalityValue}
                     onChangeStart={this.handleEqualityChangeStart}
                     onChange={this.handleEqualityChange}
@@ -484,6 +501,7 @@ class ElectedInteraction extends React.Component{
                     min={0}
                     max={10}
                     step={1}
+                    tooltip={false}
                     value={workplaceInterestValue}
                     onChangeStart={this.handleWorkplaceInterestChangeStart}
                     onChange={this.handleWorkplaceInterestChange}
@@ -507,6 +525,7 @@ class ElectedInteraction extends React.Component{
                     max={10}
                     step={1}
                     value={impactValue}
+                    tooltip={false}
                     onChangeStart={this.handleImpactChangeStart}
                     onChange={this.handleImpactChange}
                     onChangeComplete={this.handleImpactChangeComplete}
@@ -528,6 +547,7 @@ class ElectedInteraction extends React.Component{
                     min={0}
                     max={10}
                     step={1}
+                    tooltip={false}
                     value={safeWorkspaceValue}
                     onChangeStart={this.handleSafeWorkspaceChangeStart}
                     onChange={this.handleSafeWorkspaceChange}
@@ -543,7 +563,7 @@ class ElectedInteraction extends React.Component{
             </div>
 
           </Box>
-          <Box width={1/2} mt={70}>
+          <Box width={1/2} mt={120}>
             <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
             {renderCards()}
           </Box>

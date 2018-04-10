@@ -7,7 +7,7 @@ const H2 = styled.h2`
   letter-spacing: -1.25px;
   line-height: 1em;
   color: #484848;
-  margin-bottom: .5em;
+  margin-bottom: .2em;
 `;
 
 export default H2;
