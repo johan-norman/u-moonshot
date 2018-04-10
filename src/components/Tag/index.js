@@ -14,9 +14,7 @@ class Tag extends React.Component{
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      isToggleOn: false,
-      color_white: true,
-      
+
     };
   }
 
@@ -41,13 +39,7 @@ class Tag extends React.Component{
     let fontColor = this.state.color_white ? "black" : "white"
 
     return(
-      <TagsContainer>
-        {/*
-        <button onClick={this.handleClick.bind(this)} style={{backgroundColor: bgColor, color: fontColor}}>
-          {this.state.isToggleOn ? 'Lägg till detta intresse' : 'Ta bort detta intresse'}
-        </button>
-        */}
-
+      <TagItem>
         {this.state.interests.map(item =>
           <TagItem
             onClick={this.handleClick.bind(this)}
@@ -57,9 +49,9 @@ class Tag extends React.Component{
             {item.title}
           </TagItem>
         )}
-      </TagsContainer>
+      </TagItem>
     )
   }
 }
 
-export default Tags;
+export default Tag;

@@ -124,6 +124,19 @@ const StyledCard = styled.div`
     height: 320px;
   }
 
+  .card-text-container {
+    p {
+      font-size: 15px;
+      color: #9C9C9C;
+      margin-bottom: 0;
+    }
+    h3 {
+      font-size: 18px;
+      color: #595959;
+      letter-spacing: 0;
+      margin: 0;
+    }
+  }
 
 `;
 

@@ -7,7 +7,7 @@ import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled';
 import Card from '../../components/Card';
 import { SalaryHorizontal, TimeHorizontal } from '../../components/ValueSliders';
-import Tags from '../../components/Tags';
+import Tag from '../../components/Tag';
 
 const ModuleContainer = styled.section`
   min-height: 500px;
@@ -94,91 +94,6 @@ class ProfileSection extends React.Component{
   render() {
     return(
       <div className="profile-section-container">
-        <ModuleContainer>
-          <ChapterNumberLine sectionnumber="02" sectiontitle="Skapa profil" />
-          <Flex>
-            <Box width={1/2}/>
-            <Box width={1/2}>
-              <H3>
-                Unionen finns för och kan hjälpa en mängd olika personer. För att visa ett så relevant innehåll som möjligt skulle vi vilja veta lite mer om dig. Lorem ipsum dolor sit amet.
-              </H3>
-            </Box>
-          </Flex>
-
-          <Flex>
-            <Box width={3/3}>
-              <H2>För dig som: <span>Systemutvecklare</span><br/>med en lön på <span>35 000</span> kr och med<br/><span>6 års</span> erfarenhet i yrket.</H2>
-            </Box>
-          </Flex>
-
-          <Flex>
-            <Box width={1/2}/>
-            <Box width={1/2}>
-              <SecondaryText>
-                Du kan alltid spara och utveckla din profil för ett mer personligt bemötande Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere quis lacus ut malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vitae placerat felis.
-              </SecondaryText>
-            </Box>
-          </Flex>
-        </ModuleContainer>
-
-        <ProfileCardsContainer>
-          <Flex mt={-110}>
-            <Box width={1/5} m={15}>
-              <Card cardType="ImageCard" title="Förtroendevald" bodytext="lorem ipsum" />
-            </Box>
-            <Box width={1/5} m={15}>
-              <Card cardType="ImageCard" title="Förtroendevald" bodytext="lorem ipsum" />
-            </Box>
-            <Box width={1/5} m={15}>
-              <Card cardType="ImageCard" title="Förtroendevald" bodytext="lorem ipsum" />
-            </Box>
-            <Box width={1/5} m={15}>
-              <Card cardType="ImageCard" title="Förtroendevald" bodytext="lorem ipsum" />
-            </Box>
-            <Box width={1/5} m={15}>
-              <Card cardType="ImageCard" title="Förtroendevald" bodytext="lorem ipsum" />
-            </Box>
-          </Flex>
-        </ProfileCardsContainer>
-
-        <ModuleContainer>
-        <ChapterNumberLine sectionnumber="02" sectiontitle="Skapa profil" />
-          <Flex mt={-60}>
-            <Box width={1/2} m={50}>
-              <H2>
-                Berätta mer om dig.
-              </H2>
-              <SecondaryText>
-                Du kan alltid spara och utveckla din profil för ett mer personligt bemötande Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Nam posuere quis lacus ut malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-              </SecondaryText>
-            </Box>
-            <Box width={1/2} m={50}>
-              <Button>Logga in med din profil</Button>
-              <Button>Spara profil</Button>
-            </Box>
-          </Flex>
-
-          <Flex>
-            <Box width={1/2} m={50}>
-              <H3>
-                Lorem ipsum dolor sit amet?
-              </H3>
-
-              <SalaryHorizontal />
-              <TimeHorizontal />
-               <br/>
-               <br/>
-              Lorem ipsum dolor sit amet? <br/>
-              <Tags />
-            </Box>
-
-            <Box width={1/2} m={50}>
-              Rekommenderas för dig: <br/>
-              2x2 imagecards
-            </Box>
-          </Flex>
-        </ModuleContainer>
-
       </div>
     )
   }

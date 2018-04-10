@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import HeroImageModule from '../../modules/HeroImageModule'
-import WorkEnvironmentInteraction from '../../modules/WorkEnvironmentInteraction'
+import ElectedInteraction from '../../modules/ElectedInteraction'
 import NewMemberModule from '../../modules/NewMemberModule'
 import CrossSiteLinks from '../../modules/CrossSiteLinksModule'
 import CardSlider from '../../modules/CardSlider'
@@ -41,7 +41,7 @@ const EventsData = [
 export default () => (
   <PageContainer>
     <HeroImageModule text="Skapa arbetsplatsen du vill jobba på" />
-    <WorkEnvironmentInteraction />
+    <ElectedInteraction />
     <NewMemberModule title="Bli medlem och skapa förändring" subtext="Tar du steget till att bli förtroendevald får du coaching, verktyg och utbildningar. Bli medlem idag så bjuder på avgiften i tre månader." />
     <CardSlider cards={CardsData} />
     <FullSizeSlider cards={EventsData} />
