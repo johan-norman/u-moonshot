@@ -21,9 +21,33 @@ const ImageBoxContainer = styled.section`
     height: 100%;
     position:relative;
     border-right: 1px solid #fff;
+
+    &:hover {
+      background: rgba(0,0,0,.8);
+      .image-box-content {
+        bottom: 20px;
+      }
+    }
+
+    > a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+  .image-box-content {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: all .1s ease-in-out;
   }
   h2 {
     color #fff;
+    font-size: 33px;
+    letter-spacing: -1px;
   }
 `;
 
@@ -59,8 +83,7 @@ class CrossSiteLinks extends React.Component{
           <Box width={1/4} className="image-box">
             <Link to="/karriar">
               <div className="image-box-content">
-                <h2>Yrke/Lön</h2>
-                <p>Lorem ipsum</p>
+                <h2>Karriär</h2>
               </div>
             </Link>
           </Box>
@@ -68,15 +91,13 @@ class CrossSiteLinks extends React.Component{
             <Link to="/arbetsmiljo">
               <div className="image-box-content">
                 <h2>Arbetsmiljö</h2>
-                <p>Lorem ipsum</p>
               </div>
             </Link>
           </Box>
           <Box width={1/4} className="image-box">
             <Link to="/fortroendevald">
               <div className="image-box-content">
-                <h2>Påverkan</h2>
-                <p>Lorem ipsum</p>
+                <h2>Förtroendevald</h2>
               </div>
             </Link>
           </Box>
@@ -84,7 +105,6 @@ class CrossSiteLinks extends React.Component{
             <Link to="/bli-medlem">
               <div className="image-box-content">
                 <h2>Bli medlem</h2>
-                <p>Lorem ipsum</p>
               </div>
             </Link>
           </Box>

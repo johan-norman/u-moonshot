@@ -439,7 +439,7 @@ class ElectedInteraction extends React.Component{
       <Container>
 
         <Flex pb={100}>
-          <Box width={1/2} pr={100}>
+          <Box width={1/2} pr={140}>
             <H2>Vad brinner<br/>du för?</H2>
             <Preamble>Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.</Preamble>
 
