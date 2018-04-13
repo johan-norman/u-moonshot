@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styled from 'styled-components'
 
 import HeroImageModule from '../../modules/HeroImageModule'
@@ -42,13 +42,29 @@ const EventsData = [
   {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"}
 ];
 
-export default () => (
-  <CareerContainer>
-    <HeroImageModule text="Rätt lön attraherar rätt kompetens" img="" />
-    <CareerInteraction />
-    <NewMemberModule title="Bli medlem och få lönecoachning" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
-    <CardSlider cards={CardsData} />
-    <FullSizeSlider cards={EventsData} />
-    <CrossSiteLinks />
-  </CareerContainer>
-)
+class CareerPage extends Component {
+  constructor(props){
+    super(props);
+    this.handleDataChange = this.handleDataChange.bind(this);
+  }
+
+  handleDataChange(key, payload) {
+    this.props.onDataChange(key, payload);
+  }
+
+  render() {
+    return (
+      <CareerContainer>
+        <HeroImageModule text="Rätt lön attraherar rätt kompetens" img="" />
+        <CareerInteraction 
+          onDataChange={this.handleDataChange} data={this.props.data}/>
+        <NewMemberModule title="Bli medlem och få lönecoachning" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
+        <CardSlider cards={CardsData} />
+        <FullSizeSlider cards={EventsData} />
+        <CrossSiteLinks />
+      </CareerContainer>
+    );
+  }
+}
+
+export default CareerPage;

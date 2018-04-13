@@ -488,10 +488,16 @@ class CareerInteraction extends React.Component{
       showWorkDropdown: false,
       showSalaryDropdown: false,
       showExperienceDropdown: false,
-      salaryValue: 35000,
-      workTitle: "Systemutvecklare",
-      experienceValue: 6
+      salaryValue: this.props.data.career.salary,
+      workTitle: this.props.data.career.job_title,
+      experienceValue: this.props.data.career.experience,
     };
+
+    this.handleDataChange = this.handleDataChange.bind(this);
+  }
+
+  handleDataChange(key, payload) {
+    this.props.onDataChange(key, payload);
   }
 
   toggleWorkDropdown(item) {
@@ -521,10 +527,7 @@ class CareerInteraction extends React.Component{
   }
 
   changeWorkTitle = itemValue => {
-    console.log(itemValue);
-    this.setState({
-      workTitle: itemValue
-    })
+    this.handleDataChange('career', {job_title: itemValue});
     this.closeAllDropdowns();
   };
 
@@ -534,6 +537,7 @@ class CareerInteraction extends React.Component{
   };
 
   handleSalaryChange = salaryValue => {
+    this.handleDataChange('career', {salary: salaryValue});
     this.setState({
       salaryValue: salaryValue
     })
@@ -549,6 +553,7 @@ class CareerInteraction extends React.Component{
   };
 
   handleExperienceChange = experienceValue => {
+    this.handleDataChange('career', {experience: experienceValue});
     this.setState({
       experienceValue: experienceValue
     })
@@ -558,8 +563,13 @@ class CareerInteraction extends React.Component{
     console.log('Change event completed')
   };
 
-  componentDidMount() {
-      console.log(this.state);
+  componentDidUpdate(nextProps) {
+      if ((nextProps.data.career.job_title) !== this.state.workTitle) {
+      console.log('changed');
+      this.setState({
+        workTitle: nextProps.data.career.job_title
+      });
+    }
   }
 
   render() {

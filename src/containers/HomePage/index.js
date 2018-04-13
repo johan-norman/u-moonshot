@@ -40,7 +40,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us')
 }, dispatch)
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default Home;
