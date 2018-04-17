@@ -10,6 +10,10 @@ const CardsData = [
   {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
   {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
   {category: "Seminarium", title: "LinkedIn-granskning", imgsrc: "google.se"},
+  {category: "Senaste på Unionen-bloggen", title: '"Så blir du redo för det nya arbetslivet"', imgsrc: "google.se"},
+  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
+  {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
+  {category: "Seminarium", title: "LinkedIn-granskning", imgsrc: "google.se"},
   {category: "Senaste på Unionen-bloggen", title: '"Så blir du redo för det nya arbetslivet"', imgsrc: "google.se"}
 ];
 
@@ -314,6 +318,7 @@ clear: both;
 const renderCards = function() {
     var groupSize = 2;
     var rows = CardsData.map(function(card, index) {
+        if (index > 3) return;
         // map content to html elements
         return(
           <Box width={300} mx={"8px"}>
@@ -346,13 +351,14 @@ class ElectedInteraction extends React.Component{
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      workEnvironmentValue: 8,
-      equalityValue: 3,
-      workplaceInterestValue: 7,
-      impactValue: 3,
-      safeWorkspaceValue: 5
+      workEnvironmentValue: this.props.data.elected.work_environment_value,
+      equalityValue: this.props.data.elected.equality_value,
+      workplaceInterestValue: this.props.data.elected.workplace_interest_value,
+      impactValue: this.props.data.elected.impact_value,
+      safeWorkspaceValue: this.props.data.elected.safe_workspace_value
     }
 
+    this.handleDataChange = this.handleDataChange.bind(this);
   }
 
   componentDidMount() {
@@ -362,14 +368,21 @@ class ElectedInteraction extends React.Component{
 
   }
 
+  handleDataChange(key, payload) {
+    this.props.onDataChange(key, payload);
+  }
+
   // FIRST SLIDER - WORK ENVIRONMENT
   handleWorkEnvironmentChangeStart = () => {
     console.log('Change event handleExperienceChangeStart')
   };
   handleWorkEnvironmentChange = value  => {
-    this.setState({
-      workEnvironmentValue: value
-    })
+    if (this.state.workEnvironmentValue !== value) {
+      this.handleDataChange('elected', {work_environment_value: value});
+      this.setState({
+        workEnvironmentValue: value
+      })
+    }
   };
   handleWorkEnvironmentChangeComplete = () => {
     console.log('Change event completed')
@@ -380,9 +393,12 @@ class ElectedInteraction extends React.Component{
     console.log('Change event handleExperienceChangeStart')
   };
   handleEqualityChange = value  => {
-    this.setState({
-      equalityValue: value
-    })
+    if (this.state.equalityValue !== value) {
+      this.handleDataChange('elected', {equality_value: value});
+      this.setState({
+        equalityValue: value
+      })
+    }
   };
   handleEqualityChangeComplete = () => {
     console.log('Change event completed')
@@ -393,9 +409,12 @@ class ElectedInteraction extends React.Component{
     console.log('Change event handleExperienceChangeStart')
   };
   handleWorkplaceInterestChange = value  => {
-    this.setState({
-      workplaceInterestValue: value
-    })
+    if (this.state.workplaceInterestValue !== value) {
+      this.handleDataChange('elected', {workplace_interest_value: value});
+      this.setState({
+        workplaceInterestValue: value
+      })
+    }
   };
   handleWorkplaceInterestChangeComplete = () => {
     console.log('Change event completed')
@@ -406,9 +425,12 @@ class ElectedInteraction extends React.Component{
     console.log('Change event handleExperienceChangeStart')
   };
   handleImpactChange = value  => {
-    this.setState({
-      impactValue: value
-    })
+    if (this.state.impactValue !== value) {
+      this.handleDataChange('elected', {impact_value: value});
+      this.setState({
+        impactValue: value
+      })
+    }
   };
   handleImpactChangeComplete = () => {
     console.log('Change event completed')
@@ -419,9 +441,12 @@ class ElectedInteraction extends React.Component{
     console.log('Change event handleExperienceChangeStart')
   };
   handleSafeWorkspaceChange = value  => {
-    this.setState({
-      safeWorkspaceValue: value
-    })
+    if (this.state.safeWorkspaceValue !== value) {
+      this.handleDataChange('elected', {isafe_workspace_value: value});
+      this.setState({
+        safeWorkspaceValue: value
+      })
+    }
   };
   handleSafeWorkspaceChangeComplete = () => {
     console.log('Change event completed')

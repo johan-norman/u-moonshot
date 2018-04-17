@@ -57,7 +57,8 @@ class CareerPage extends Component {
       <CareerContainer>
         <HeroImageModule text="Rätt lön attraherar rätt kompetens" img="" />
         <CareerInteraction 
-          onDataChange={this.handleDataChange} data={this.props.data}/>
+          onDataChange={this.handleDataChange} 
+          data={this.props.data}/>
         <NewMemberModule title="Bli medlem och få lönecoachning" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
         <CardSlider cards={CardsData} />
         <FullSizeSlider cards={EventsData} />

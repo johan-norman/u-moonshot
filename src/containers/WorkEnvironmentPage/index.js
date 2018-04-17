@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styled from 'styled-components'
 
 import HeroImageModule from '../../modules/HeroImageModule'
@@ -38,13 +38,31 @@ const EventsData = [
   {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"}
 ];
 
-export default () => (
-  <PageContainer>
-    <HeroImageModule text="I god jord växer starka plantor" />
-    <WorkEnvironmentInteraction />
-    <NewMemberModule title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
-    <CardSlider cards={CardsData} />
-    <FullSizeSlider cards={EventsData} />
-    <CrossSiteLinks />
-  </PageContainer>
-)
+export class WorkEnvironmentPage extends Component {
+
+  constructor(props){
+    super(props);
+    this.handleDataChange = this.handleDataChange.bind(this);
+  }
+
+  handleDataChange(key, payload) {
+    this.props.onDataChange(key, payload);
+  }
+
+  render() {
+    return (
+      <PageContainer>
+        <HeroImageModule text="I god jord växer starka plantor" />
+        <WorkEnvironmentInteraction 
+          onDataChange={this.handleDataChange} 
+          data={this.props.data}/>
+        <NewMemberModule title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
+        <CardSlider cards={CardsData} />
+        <FullSizeSlider cards={EventsData} />
+        <CrossSiteLinks />
+      </PageContainer>
+    );
+  }
+}
+
+export default WorkEnvironmentPage;

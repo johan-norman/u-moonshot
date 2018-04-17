@@ -5,36 +5,6 @@ import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled'
 import H2 from '../../components/H2'
 
-const WorkPlaceTags = [
-  {id: 0, title: "Jämlikhet", active: false},
-  {id: 1, title: "Hög ljudnivå", active: false},
-  {id: 2, title: "Toppstyrt", active: false},
-  {id: 3, title: "Övertid", active: false},
-  {id: 4, title: "Transparens", active: false},
-  {id: 5, title: "Miljöansvar", active: false},
-  {id: 6, title: "Stor arbetsplats", active: false},
-  {id: 7, title: "Hierarkiskt", active: false},
-  {id: 8, title: "Mycket möten", active: false},
-  {id: 9, title: "Bra löneläge", active: false},
-  {id: 10, title: "God stämning", active: false},
-  {id: 11, title: "Stressigt", active: false},
-  {id: 12, title: "Konfliktfylld", active: false},
-  {id: 13, title: "Utbildningsmöjligheter", active: false},
-  {id: 14, title: "Öppetlandskap", active: false},
-  {id: 15, title: "Mycket resor", active: false},
-  {id: 16, title: "Liten arbetsplats", active: false},
-  {id: 17, title: "Riskfyllt", active: false},
-  {id: 18, title: "Kollektivavtal", active: false},
-  {id: 19, title: "Hög sjukfrånvaro", active: false},
-  {id: 20, title: "Många konsulter", active: false},
-  {id: 21, title: "Fritidsaktiviteter", active: false},
-  {id: 22, title: "Svår att ta föräldraledigt", active: false},
-  {id: 23, title: "Utomhusarbete", active: false},
-  {id: 24, title: "Inkluderande", active: false},
-  {id: 25, title: "Träningsmöjligheter", active: false},
-  {id: 26, title: "Samhällsansvar", active: false}
-];
-
 const CardsData = [
   {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
   {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
@@ -142,9 +112,10 @@ class WorkEnvironmentInteraction extends React.Component{
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleDataChange = this.handleDataChange.bind(this);
 
     this.state = {
-      tagsData: WorkPlaceTags
+      tagsData: this.props.data.work_environment.tags
     };
 
   }
@@ -153,10 +124,15 @@ class WorkEnvironmentInteraction extends React.Component{
   }
 
   handleClick = index => {
-    WorkPlaceTags[index].active = !WorkPlaceTags[index].active
+    //WorkPlaceTags[index].active = !WorkPlaceTags[index].active
     this.setState(prevState => ({
-      tagsData: WorkPlaceTags
+      //tagsData: WorkPlaceTags
     }));
+    this.props.onDataChange('work_environment', index);
+  }
+
+  handleDataChange() {
+
   }
 
   render() {

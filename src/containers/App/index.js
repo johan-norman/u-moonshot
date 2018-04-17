@@ -5,8 +5,8 @@ import merge from 'lodash/merge'
 
 import Home from '../HomePage'
 import CareerPage from '../CareerPage'
-import WorkEnvironment from '../WorkEnvironmentPage'
-import Elected from '../ElectedPage'
+import WorkEnvironmentPage from '../WorkEnvironmentPage'
+import ElectedPage from '../ElectedPage'
 import BecomeMember from '../BecomeMemberPage'
 import Profile from '../ProfilePage'
 
@@ -16,36 +16,42 @@ import State from '../../lib/DataHandlers';
 import default_data from '../../lib/default_data';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.handleSelectTag = (tag) => {
-      if (!this.state.selectedTags.includes(tag)) {
-        this.setState({
-          selectedTags: [...this.state.selectedTags, tag]
-        })
-      }
-      else {
-        let index = this.state.selectedTags.indexOf(tag);
-        this.setState(prevState => {
-          let newData = prevState.selectedTags.slice();
-          newData.splice(index, 1);
-          return {selectedTags: newData}
-        })
-      }
+        this.handleSelectTag = (tag) => {
+            if (!this.state.selectedTags.includes(tag)) {
+                this.setState({
+                    selectedTags: [...this.state.selectedTags, tag]
+                })
+            }
+            else {
+                let index = this.state.selectedTags.indexOf(tag);
+                this.setState(prevState => {
+                    let newData = prevState.selectedTags.slice();
+                    newData.splice(index, 1);
+                    return {selectedTags: newData}
+                })
+            }
+        }
+        this.data = default_data;
+        this.handleDataChange = this.handleDataChange.bind(this);
     }
 
-    this.data = default_data;
-  this.handleDataChange = this.handleDataChange.bind(this);
-  
-  }
-
     handleDataChange(key, payload) {
+        console.log(key, payload);
         if (key === 'career') {
            this.data.career = merge(this.data.career, payload);
         }
         if (key === 'work_environment') {
-           
+            let tags = this.data.work_environment.tags;
+            let index = payload;
+            tags[index].active = !tags[index].active;
+            this.data.work_environment.tags =  tags;
+            console.log(this.data.work_environment.tags);
+        }
+        if (key === 'elected') {
+           this.data.elected = merge(this.data.elected, payload);
         }
         localStorage.setItem('storedData', JSON.stringify(this.data));
     }
@@ -70,8 +76,8 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/karriar" render={()=><CareerPage data={this.data} onDataChange={this.handleDataChange} />} />
-                    <Route exact path="/arbetsmiljo" component={WorkEnvironment} />
-                    <Route exact path="/fortroendevald" component={Elected} />
+                    <Route exact path="/arbetsmiljo" render={()=><WorkEnvironmentPage data={this.data} onDataChange={this.handleDataChange} />} />
+                    <Route exact path="/fortroendevald" render={()=><ElectedPage data={this.data} onDataChange={this.handleDataChange} />} />
                     <Route exact path="/bli-medlem" component={BecomeMember} />
                     <Route exact path="/profil" component={Profile} />
                 </Switch>
