@@ -1,20 +1,17 @@
 import React from 'react'
+
 import styled from 'styled-components';
 import Charming from 'react-charming'
 import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled'
 import H2 from '../../components/H2'
+import DelayedComponent from '../../components/DelayedComponent'
 
-const CardsData = [
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
-  {category: "Seminarium", title: "LinkedIn-granskning", imgsrc: "google.se"},
-  {category: "Senaste på Unionen-bloggen", title: '"Så blir du redo för det nya arbetslivet"', imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering5", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"}
-];
+import orderBy from 'lodash/orderBy'
+
+import {cards_data as CardsData} from '../../lib/default_data';
+
+import './style.css';
 
 const StyledTagItem = styled.button`
     background: transparent;
@@ -74,35 +71,60 @@ const StyledCard = styled.div`
 
 `;
 
+const AnimatedBox = styled(Box)`
+  animation: fadein 2s;
+`
+
 const RecommendedTag = styled.p`
   color: #AAAAAA;
   font-size: 18px;
 `;
 
-const renderCards = function() {
+const renderCards = function(data) {
     var groupSize = 4;
-    var rows = CardsData.map(function(card, index) {
+    //let CardsDataScored = Object.assign({}, CardsData);
+    let SelectedTags = data.map(tag => {
+      if (tag.active) return tag.title;
+    });
+    let CardsDataScored = CardsData.map(function(card) {
+      let score = 0;
+      card.tags.forEach(tag => {
+        if (SelectedTags.includes(tag)) score++;
+      })
+      let ScoredCard = Object.assign({}, card);
+      ScoredCard.score = score;
+      return ScoredCard;
+    });
+    console.log(CardsDataScored);
+    CardsDataScored = orderBy(CardsDataScored, 'score', 'desc')
+    let waitCounter = 1;
+    var rows = CardsDataScored.map(function(card, index) {
+        waitCounter++;
         // map content to html elements
+        if (index < 8) {
         return(
-          <Box width={300} mx={"8px"}>
+          <DelayedComponent wait={waitCounter*150} key={card.title + index}>
+          <AnimatedBox width={300} mx={"8px"} className="show animated-box">
             <StyledCard key={card.title + index}>
-                <div className="card-image"></div>
+                <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
                 <div className="card-text-container">
                   <p className="category-text">{card.category}</p>
                   <h3>{card.title}</h3>
                 </div>
             </StyledCard>
-          </Box>
+          </AnimatedBox>
+          </DelayedComponent>
         )
+        }
     }).reduce(function(r, element, index) {
         // create element groups with size 3, result looks like:
         // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
         index % groupSize === 0 && r.push([]);
         r[r.length - 1].push(element);
         return r;
-    }, []).map(function(rowContent) {
+    }, []).map(function(rowContent, index) {
         // surround every group with 'row'
-        return <Flex>{rowContent}</Flex>;
+        return <Flex key={index}>{rowContent}</Flex>;
     });
     return <div className="cards-container">{rows}</div>;
 }
@@ -168,7 +190,7 @@ class WorkEnvironmentInteraction extends React.Component{
         </Flex>
 
         <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-        {renderCards()}
+        {renderCards(this.props.data.work_environment.tags)}
 
       </Container>
     )

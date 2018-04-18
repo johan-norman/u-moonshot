@@ -1,0 +1,16 @@
+.cards-container {
+	overflow: hidden;
+}
+
+.animated-box {
+
+	transition: 2s;
+	opacity: 0;
+	visibility: hidden; 
+
+}
+
+.show {
+	opacity: 1;
+	visibility: visible; 
+}

@@ -5,17 +5,11 @@ import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled'
 import H2 from '../../components/H2'
 import Slider from 'react-rangeslider';
+import DelayedComponent from '../../components/DelayedComponent'
 
-const CardsData = [
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
-  {category: "Seminarium", title: "LinkedIn-granskning", imgsrc: "google.se"},
-  {category: "Senaste på Unionen-bloggen", title: '"Så blir du redo för det nya arbetslivet"', imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
-  {category: "Seminarium", title: "LinkedIn-granskning", imgsrc: "google.se"},
-  {category: "Senaste på Unionen-bloggen", title: '"Så blir du redo för det nya arbetslivet"', imgsrc: "google.se"}
-];
+import orderBy from 'lodash/orderBy'
+
+import {cards_data as CardsData} from '../../lib/default_data';
 
 const Container = styled(Box)`
   max-width: 1248px;
@@ -315,21 +309,39 @@ clear: both;
 }
 `;
 
-const renderCards = function() {
+const renderCards = function(data) {
     var groupSize = 2;
-    var rows = CardsData.map(function(card, index) {
+
+    let CardsDataScored = CardsData.map(function(card) {
+      let score = 0;
+      score += data.work_environment_value * card.scores.work_environment_value;
+      score += data.equality_value * card.scores.equality_value;
+      score += data.workplace_interest_value * card.scores.workplace_interest_value;
+      score += data.impact_value * card.scores.impact_value;
+      score += data.safe_workspace_value * card.scores.safe_workspace_value;
+      let ScoredCard = Object.assign({}, card);
+      ScoredCard.score = score;
+      return ScoredCard;
+    });
+    console.log(CardsDataScored.score);
+    CardsDataScored = orderBy(CardsDataScored, 'score', 'desc')
+    let waitCounter = 1;
+    var rows = CardsDataScored.map(function(card, index) {
         if (index > 3) return;
+        waitCounter++;
         // map content to html elements
         return(
+          <DelayedComponent wait={waitCounter*150} key={card.title + index}>
           <Box width={300} mx={"8px"}>
             <StyledCard key={card.title + index}>
-                <div className="card-image"></div>
+                <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
                 <div className="card-text-container">
                   <p className="category-text">{card.category}</p>
                   <h3>{card.title}</h3>
                 </div>
             </StyledCard>
           </Box>
+          </DelayedComponent>
         )
     }).reduce(function(r, element, index) {
         // create element groups with size 3, result looks like:
@@ -442,7 +454,7 @@ class ElectedInteraction extends React.Component{
   };
   handleSafeWorkspaceChange = value  => {
     if (this.state.safeWorkspaceValue !== value) {
-      this.handleDataChange('elected', {isafe_workspace_value: value});
+      this.handleDataChange('elected', {safe_workspace_value: value});
       this.setState({
         safeWorkspaceValue: value
       })
@@ -590,7 +602,7 @@ class ElectedInteraction extends React.Component{
           </Box>
           <Box width={1/2} mt={120}>
             <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-            {renderCards()}
+            {renderCards(this.props.data.elected)}
           </Box>
         </Flex>
 

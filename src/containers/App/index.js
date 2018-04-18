@@ -13,7 +13,7 @@ import Profile from '../ProfilePage'
 import PageHeaderModule from '../../modules/PageHeaderModule'
 
 import State from '../../lib/DataHandlers';
-import default_data from '../../lib/default_data';
+import {default_data} from '../../lib/default_data';
 
 class App extends Component {
     constructor(props) {
