@@ -14,20 +14,6 @@ const CareerContainer = styled.div`
 
 `;
 
-
-const EventsData = [
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Löneförhandling", title: "Så lyckas du", imgsrc: "google.se"},
-  {category: "Seminarium", title: "LinkedIn-granskning", imgsrc: "google.se"},
-  {category: "Senaste på Unionen-bloggen", title: '"Så blir du redo för det nya arbetslivet"', imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering5", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"},
-  {category: "Kurser & Aktiviteter", title: "Kompetensinventering", imgsrc: "google.se"}
-];
-
 class CareerPage extends Component {
   constructor(props){
     super(props);
@@ -46,8 +32,8 @@ class CareerPage extends Component {
           onDataChange={this.handleDataChange} 
           data={this.props.data}/>
         <NewMemberModule title="Bli medlem och få lönecoachning" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
-        <CardSlider cards={CardsData} />
-        <FullSizeSlider cards={EventsData} />
+        <CardSlider cards={this.props.data.cards_data} />
+        <FullSizeSlider cards={this.props.data.cards_data} />
         <CrossSiteLinks />
       </CareerContainer>
     );

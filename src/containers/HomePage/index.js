@@ -17,7 +17,7 @@ import NewMemberModule from '../../modules/NewMemberModule'
 import ProfileSection from './ProfileSection.js'
 import ArticleSection from './ArticleSection.js'
 
-const Home = props => (
+const HomePage = props => (
   <section>
     <HeroVideoModule />
     <CrossSiteLinks />
@@ -40,4 +40,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us')
 }, dispatch)
 
-export default Home;
+export default HomePage;

@@ -1,0 +1,23 @@
+.styled-tag-item {
+	background: transparent;
+	padding: .4em .5em;
+	margin: 0 .3em .3em 0;
+	border: 1px solid #979797;
+	font-size: 15px;
+	color: #434343;
+	outline: 0;
+	cursor: pointer;
+	opacity: .8;
+}
+
+.styled-tag-item:hover {
+	border: 1px solid #000;
+	opacity: 1;
+}
+
+.styled-tag-item.active {
+	background: #484848;
+	color: #fff;
+	border: 1px solid #484848;
+	opacity: 1;
+}

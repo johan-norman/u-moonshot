@@ -4,6 +4,8 @@ import Slider from 'react-slick'
 import RightArrow from './right-arrow.svg'
 import H2 from '../../components/H2'
 
+import './style.css';
+
 const SliderContainer = styled.section`
   overflow: hidden;
   padding: 0;
@@ -105,7 +107,7 @@ const StyledCard = styled.div`
   }
 
   .card-image {
-    background: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.5);
     width: 100vw;
     height: 660px;
     display: inline-block;
@@ -153,7 +155,7 @@ class FullSizeSlider extends React.Component{
               <p className="category-text">{card.category}</p>
               <H2>{card.title}</H2>
             </div>
-            <div className="card-image" style={ { backgroundImage: `url(http://placekitten.com/g/1440/800)` } }></div>
+            <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
           </StyledCard>
       );
     })

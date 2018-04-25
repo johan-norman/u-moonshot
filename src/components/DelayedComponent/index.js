@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, ClassNames} from 'react';
 
 import './style.css';
 
@@ -6,7 +6,7 @@ export class DelayedComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { hidden: 'hidden' };
+        this.state = { hidden: true };
     }
 
     componentWillMount() {
@@ -17,12 +17,14 @@ export class DelayedComponent extends Component {
     }
 
     show() {
-        this.setState({hidden : ""});
+        this.setState({hidden : false});
     }
 
     render() {
+        const hidden = this.state.hidden ? 'hidden' : 'show';
+        const classes = `${hidden} hidden-component`;
         return (
-            <div className={this.state.hidden}>
+            <div className={classes}>
                 {this.props.children}
             </div>
         );

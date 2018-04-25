@@ -162,7 +162,7 @@ class CardSlider extends React.Component{
     const renderCards = this.props.cards.map((card, index) => {
       return (
           <StyledCard key={card.title + index}>
-              <div className="card-image"></div>
+              <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
               <div className="card-text-container">
                 <p className="category-text">{card.category}</p>
                 <h3>{card.title}</h3>

@@ -21,33 +21,23 @@ const ImageBoxContainer = styled.section`
     height: 100%;
     position:relative;
     border-right: 1px solid #fff;
-
-    &:hover {
-      background: rgba(0,0,0,.8);
-      .image-box-content {
-        bottom: 20px;
-      }
-    }
-
-    > a {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-    }
-
   }
   .image-box-content {
-    position: absolute;
-    bottom: 0;
-    left: 20px;
-    text-decoration: none;
-    color: #fff;
-    transition: all .1s ease-in-out;
-  }
-  h2 {
     color #fff;
-    font-size: 33px;
-    letter-spacing: -1px;
+    span {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    h2 {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      letter-spacing: -1px;
+    }
+  }
+  a {
+    text-decoration: none;
   }
 `;
 
@@ -83,6 +73,7 @@ class CrossSiteLinks extends React.Component{
           <Box width={1/4} className="image-box">
             <Link to="/karriar">
               <div className="image-box-content">
+                <span>01</span>
                 <h2>Karriär</h2>
               </div>
             </Link>
@@ -90,6 +81,7 @@ class CrossSiteLinks extends React.Component{
           <Box width={1/4} className="image-box">
             <Link to="/arbetsmiljo">
               <div className="image-box-content">
+                <span>02</span>
                 <h2>Arbetsmiljö</h2>
               </div>
             </Link>
@@ -97,6 +89,7 @@ class CrossSiteLinks extends React.Component{
           <Box width={1/4} className="image-box">
             <Link to="/fortroendevald">
               <div className="image-box-content">
+                <span>03</span>
                 <h2>Förtroendevald</h2>
               </div>
             </Link>
@@ -104,6 +97,7 @@ class CrossSiteLinks extends React.Component{
           <Box width={1/4} className="image-box">
             <Link to="/bli-medlem">
               <div className="image-box-content">
+                <span>04</span>
                 <h2>Bli medlem</h2>
               </div>
             </Link>

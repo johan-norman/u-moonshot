@@ -7,318 +7,47 @@ import H2 from '../../components/H2'
 import Slider from 'react-rangeslider';
 import DelayedComponent from '../../components/DelayedComponent'
 
+import Container from '../../components/Container'
+import StyledCard from '../../components/StyledCard'
+import RecommendedTag from '../../components/RecommendedTag'
+import Preamble from '../../components/Preamble'
+import RangeSlider from '../../components/RangeSlider'
+
 import orderBy from 'lodash/orderBy'
+import debounce from 'lodash/debounce'
 
-import {cards_data as CardsData} from '../../lib/default_data';
+class ElectedInteraction extends React.Component{
 
-const Container = styled(Box)`
-  max-width: 1248px;
-  margin: 0 auto;
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
 
-  .cards-container {
-    margin-left: -8px;
-  }
-`
-
-const StyledCard = styled.div`
-  margin-bottom: 15px;
-
-  .card-image {
-    background: #EAEAEA;
-    height: 320px;
-  }
-
-  .card-text-container {
-    p {
-      font-size: 15px;
-      color: #9C9C9C;
-      margin-bottom: 0;
+    this.state = {
+      work_environment_value: this.props.data.user_data.elected.work_environment_value,
+      equality_value: this.props.data.user_data.elected.equality_value,
+      workplace_interest_value: this.props.data.user_data.elected.workplace_interest_value,
+      impact_value: this.props.data.user_data.elected.impact_value,
+      safe_workspace_value: this.props.data.user_data.elected.safe_workspace_value
     }
-    h3 {
-      font-size: 18px;
-      color: #595959;
-      letter-spacing: 0;
-      margin: 0;
-    }
+
+    this.handleDataChange = debounce(this.handleDataChange.bind(this), 500);
   }
 
-`;
-
-const RecommendedTag = styled.p`
-  color: #AAAAAA;
-  font-size: 18px;
-`;
-
-const Preamble = styled.p`
-  opacity: 0.7;
-  font-size: 18px;
-  color: #383838;
-  letter-spacing: 0;
-  line-height: 24px;
-  max-width: 500px;
-  margin-bottom: 30px;
-`;
-
-const RangeSlider = styled.section`
-
-margin-top: 20px;
-display: block;
-clear: both;
-
-.rangeslider {
-    margin: 0 0 10px 0;
-    position: relative;
-    background: #e6e6e6;
-    -ms-touch-action: none;
-    touch-action: none;
-}
-
-.slider {
-  margin-top: 10px;
-}
-
-.question-label {
-  font-size: 18px;
-  color: #434343;
-  letter-spacing: 0;
-}
-
-.steps {
-  position: relative;
-  span {
-    width: 1px;
-    height: 8px;
-    background: #979797;
-    margin-right: 10%;
-    display: inline-block;
-    opacity: 0.5;
-    &:last-child {
-      margin: 0;
-    }
+  componentDidMount() {
   }
-}
 
-.range-labels {
-  display: inline-block;
-  clear: both;
-  width: 100%;
-  span {
-    font-size: 15px;
-    color: #9C9C9C;
-    letter-spacing: 0;
-  }
-  .left-label {float: left;}
-  .right-label {float: right;}
-}
-
-.rangeslider,
-.rangeslider .rangeslider__fill {
-    display: block;
-}
-
-.rangeslider .rangeslider__handle {
-    background: #fff;
-    cursor: move; /* fallback if grab cursor is unsupported */
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    display: inline-block;
-    position: absolute;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.2);
-
-    &:active {
-        cursor: grabbing;
-        cursor: -moz-grabbing;
-        cursor: -webkit-grabbing;
-    }
-}
-
-.rangeslider .rangeslider__handle .rangeslider__active {
-    opacity: 1
-}
-
-.rangeslider .rangeslider__handle-tooltip {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    position: absolute;
-    background-color: rgba(0, 0, 0, .8);
-    font-weight: 400;
-    font-size: 14px;
-    transition: all .1s ease-in;
-    border-radius: 4px;
-    display: inline-block;
-    color: #fff;
-    left: 50%;
-    transform: translate3d(-50%, 0, 0)
-}
-
-.rangeslider .rangeslider__handle-tooltip span {
-    margin-top: 12px;
-    display: inline-block;
-    line-height: 100%
-}
-
-.rangeslider .rangeslider__handle-tooltip:after {
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0
-}
-
-.rangeslider-horizontal {
-    height: 3px;
-}
-
-.rangeslider-horizontal .rangeslider__fill {
-    height: 100%;
-    background-color: #1FA22E;
-    border-radius: 10px;
-    top: 0
-}
-
-.rangeslider-horizontal .rangeslider__handle {
-    width: 26px;
-    height: 26px;
-    border-radius: 22px;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    outline: 0;
-    transition: all 25ms ease-in-out;
-
-    &:after {
-      content: ' ';
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      top: 7px;
-      left: 7px;
-      border-radius: 50%;
-      background-color: #A9A9A9;
-    }
-
-    &:focus {
-      &:after {
-        background-color: green;
-      }
-    }
-
-}
-
-.rangeslider-horizontal .rangeslider__handle-tooltip {
-    top: -55px
-}
-
-.rangeslider-horizontal .rangeslider__handle-tooltip:after {
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid rgba(0, 0, 0, .8);
-    left: 50%;
-    bottom: -8px;
-    transform: translate3d(-50%, 0, 0)
-}
-
-.rangeslider-vertical {
-    margin: 20px auto;
-    height: 150px;
-    max-width: 10px;
-    background-color: transparent
-}
-
-.rangeslider-vertical .rangeslider__fill,
-.rangeslider-vertical .rangeslider__handle {
-    position: absolute
-}
-
-.rangeslider-vertical .rangeslider__fill {
-    width: 100%;
-    background-color: #7cb342;
-    box-shadow: none;
-    bottom: 0
-}
-
-.rangeslider-vertical .rangeslider__handle {
-    width: 30px;
-    height: 10px;
-    left: -10px;
-    box-shadow: none
-}
-
-.rangeslider-vertical .rangeslider__handle-tooltip {
-    left: -100%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0)
-}
-
-.rangeslider-vertical .rangeslider__handle-tooltip:after {
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 8px solid rgba(0, 0, 0, .8);
-    left: 100%;
-    top: 12px
-}
-
-.rangeslider-reverse.rangeslider-horizontal .rangeslider__fill {
-    right: 0
-}
-
-.rangeslider-reverse.rangeslider-vertical .rangeslider__fill {
-    top: 0;
-    bottom: inherit
-}
-
-.rangeslider__labels {
-    position: relative
-}
-
-.rangeslider-vertical .rangeslider__labels {
-    position: relative;
-    list-style-type: none;
-    margin: 0 0 0 24px;
-    padding: 0;
-    text-align: left;
-    width: 250px;
-    height: 100%;
-    left: 10px
-}
-
-.rangeslider-vertical .rangeslider__labels .rangeslider__label-item {
-    position: absolute;
-    transform: translate3d(0, -50%, 0)
-}
-
-.rangeslider-vertical .rangeslider__labels .rangeslider__label-item::before {
-    content: '';
-    width: 10px;
-    height: 2px;
-    background: #000;
-    position: absolute;
-    left: -14px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: -1
-}
-
-.rangeslider__labels .rangeslider__label-item {
-    position: absolute;
-    font-size: 14px;
-    cursor: pointer;
-    display: inline-block;
-    top: 10px;
-    transform: translate3d(-50%, 0, 0)
-}
-`;
-
-const renderCards = function(data) {
+  renderCards(data) {
     var groupSize = 2;
-
+    const CardsData = data.cards_data;
+    const UserData = Object.assign({}, data.user_data.elected, this.state);
+    //console.log(UserData);
     let CardsDataScored = CardsData.map(function(card) {
       let score = 0;
-      score += data.work_environment_value * card.scores.work_environment_value;
-      score += data.equality_value * card.scores.equality_value;
-      score += data.workplace_interest_value * card.scores.workplace_interest_value;
-      score += data.impact_value * card.scores.impact_value;
-      score += data.safe_workspace_value * card.scores.safe_workspace_value;
+      score += UserData.work_environment_value * card.scores.work_environment_value;
+      score += UserData.equality_value * card.scores.equality_value;
+      score += UserData.workplace_interest_value * card.scores.workplace_interest_value;
+      score += UserData.impact_value * card.scores.impact_value;
+      score += UserData.safe_workspace_value * card.scores.safe_workspace_value;
       let ScoredCard = Object.assign({}, card);
       ScoredCard.score = score;
       return ScoredCard;
@@ -331,7 +60,7 @@ const renderCards = function(data) {
         waitCounter++;
         // map content to html elements
         return(
-          <DelayedComponent wait={waitCounter*150} key={card.title + index}>
+          <DelayedComponent wait={waitCounter*110} key={card.title + index}>
           <Box width={300} mx={"8px"}>
             <StyledCard key={card.title + index}>
                 <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
@@ -356,26 +85,6 @@ const renderCards = function(data) {
     return <div className="cards-container">{rows}</div>;
 }
 
-class ElectedInteraction extends React.Component{
-
-  constructor(props){
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-
-    this.state = {
-      workEnvironmentValue: this.props.data.elected.work_environment_value,
-      equalityValue: this.props.data.elected.equality_value,
-      workplaceInterestValue: this.props.data.elected.workplace_interest_value,
-      impactValue: this.props.data.elected.impact_value,
-      safeWorkspaceValue: this.props.data.elected.safe_workspace_value
-    }
-
-    this.handleDataChange = this.handleDataChange.bind(this);
-  }
-
-  componentDidMount() {
-  }
-
   handleClick = index => {
 
   }
@@ -392,7 +101,7 @@ class ElectedInteraction extends React.Component{
     if (this.state.workEnvironmentValue !== value) {
       this.handleDataChange('elected', {work_environment_value: value});
       this.setState({
-        workEnvironmentValue: value
+        work_environment_value: value
       })
     }
   };
@@ -408,7 +117,7 @@ class ElectedInteraction extends React.Component{
     if (this.state.equalityValue !== value) {
       this.handleDataChange('elected', {equality_value: value});
       this.setState({
-        equalityValue: value
+        equality_value: value
       })
     }
   };
@@ -424,7 +133,7 @@ class ElectedInteraction extends React.Component{
     if (this.state.workplaceInterestValue !== value) {
       this.handleDataChange('elected', {workplace_interest_value: value});
       this.setState({
-        workplaceInterestValue: value
+        workplace_interest_value: value
       })
     }
   };
@@ -440,7 +149,7 @@ class ElectedInteraction extends React.Component{
     if (this.state.impactValue !== value) {
       this.handleDataChange('elected', {impact_value: value});
       this.setState({
-        impactValue: value
+        impact_value: value
       })
     }
   };
@@ -456,7 +165,7 @@ class ElectedInteraction extends React.Component{
     if (this.state.safeWorkspaceValue !== value) {
       this.handleDataChange('elected', {safe_workspace_value: value});
       this.setState({
-        safeWorkspaceValue: value
+        safe_workspace_value: value
       })
     }
   };
@@ -466,14 +175,14 @@ class ElectedInteraction extends React.Component{
 
   render() {
 
-    const workEnvironmentValue = this.state.workEnvironmentValue;
-    const equalityValue = this.state.equalityValue;
-    const workplaceInterestValue = this.state.workplaceInterestValue;
-    const impactValue = this.state.impactValue;
-    const safeWorkspaceValue = this.state.safeWorkspaceValue;
+    const workEnvironmentValue = this.state.work_environment_value;
+    const equalityValue = this.state.equality_value;
+    const workplaceInterestValue = this.state.workplace_interest_value;
+    const impactValue = this.state.impact_value;
+    const safeWorkspaceValue = this.state.safe_workspace_value;
 
     return(
-      <Container>
+      <Container className="container">
 
         <Flex pb={100}>
           <Box width={1/2} pr={140}>
@@ -602,7 +311,7 @@ class ElectedInteraction extends React.Component{
           </Box>
           <Box width={1/2} mt={120}>
             <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-            {renderCards(this.props.data.elected)}
+            {this.renderCards(this.props.data)}
           </Box>
         </Flex>
 

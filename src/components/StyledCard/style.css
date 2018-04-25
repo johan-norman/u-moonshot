@@ -1,0 +1,20 @@
+.styled-card {
+	margin-bottom: 15px;
+}
+
+.styled-card  .card-image {
+	background: #EAEAEA;
+	height: 320px;
+}
+
+.styled-card .card-text-container p {
+	font-size: 15px;
+	color: #9C9C9C;
+	margin-bottom: 0;
+}
+.styled-card .card-text-container h3 {
+	font-size: 18px;
+	color: #595959;
+	letter-spacing: 0;
+	margin: 0;
+}

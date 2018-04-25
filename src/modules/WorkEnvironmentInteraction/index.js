@@ -6,84 +6,20 @@ import { TimelineMax, TweenMax, Elastic } from 'gsap';
 import { Flex, Box } from 'grid-styled'
 import H2 from '../../components/H2'
 import DelayedComponent from '../../components/DelayedComponent'
+import Container from '../../components/Container'
+import StyledCard from '../../components/StyledCard'
+import StyledTagItem from '../../components/StyledTagItem'
+import RecommendedTag from '../../components/RecommendedTag'
 
 import orderBy from 'lodash/orderBy'
 
-import {cards_data as CardsData} from '../../lib/default_data';
-
 import './style.css';
-
-const StyledTagItem = styled.button`
-    background: transparent;
-    padding: .4em .5em;
-    margin: 0 .3em .3em 0;
-    border: 1px solid #979797;
-    font-size: 15px;
-    color: #434343;
-    outline: 0;
-    cursor: pointer;
-    opacity: .8;
-
-    &:hover {
-      border: 1px solid #000;
-      opacity: 1;
-    }
-
-
-    &.active {
-      background: #484848;
-      color: #fff;
-      border: 1px solid #484848;
-      opacity: 1;
-    }
-`;
-
-const Container = styled(Box)`
-  max-width: 1248px;
-  margin: 0 auto;
-
-  .cards-container {
-    margin-left: -8px;
-  }
-`
-
-const StyledCard = styled.div`
-  margin-bottom: 15px;
-
-  .card-image {
-    background: #EAEAEA;
-    height: 320px;
-  }
-
-  .card-text-container {
-    p {
-      font-size: 15px;
-      color: #9C9C9C;
-      margin-bottom: 0;
-    }
-    h3 {
-      font-size: 18px;
-      color: #595959;
-      letter-spacing: 0;
-      margin: 0;
-    }
-  }
-
-`;
-
-const AnimatedBox = styled(Box)`
-  animation: fadein 2s;
-`
-
-const RecommendedTag = styled.p`
-  color: #AAAAAA;
-  font-size: 18px;
-`;
 
 const renderCards = function(data) {
     var groupSize = 4;
-    //let CardsDataScored = Object.assign({}, CardsData);
-    let SelectedTags = data.map(tag => {
+    const CardsData = data.cards_data;
+    const tags = data.user_data.work_environment.tags;
+    let SelectedTags = tags.map(tag => {
       if (tag.active) return tag.title;
     });
     let CardsDataScored = CardsData.map(function(card) {
@@ -95,7 +31,6 @@ const renderCards = function(data) {
       ScoredCard.score = score;
       return ScoredCard;
     });
-    console.log(CardsDataScored);
     CardsDataScored = orderBy(CardsDataScored, 'score', 'desc')
     let waitCounter = 1;
     var rows = CardsDataScored.map(function(card, index) {
@@ -103,8 +38,8 @@ const renderCards = function(data) {
         // map content to html elements
         if (index < 8) {
         return(
-          <DelayedComponent wait={waitCounter*150} key={card.title + index}>
-          <AnimatedBox width={300} mx={"8px"} className="show animated-box">
+          <DelayedComponent wait={waitCounter*110} key={card.title + index}>
+          <Box width={300} mx={"8px"} className="show animated-box">
             <StyledCard key={card.title + index}>
                 <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
                 <div className="card-text-container">
@@ -112,7 +47,7 @@ const renderCards = function(data) {
                   <h3>{card.title}</h3>
                 </div>
             </StyledCard>
-          </AnimatedBox>
+          </Box>
           </DelayedComponent>
         )
         }
@@ -137,8 +72,10 @@ class WorkEnvironmentInteraction extends React.Component{
     this.handleDataChange = this.handleDataChange.bind(this);
 
     this.state = {
-      tagsData: this.props.data.work_environment.tags
+      tagsData: this.props.data.user_data.work_environment.tags
     };
+
+    const CardsData = this.props.data.cards_data;
 
   }
 
@@ -161,7 +98,7 @@ class WorkEnvironmentInteraction extends React.Component{
 
     const renderTags = this.state.tagsData.map((tag, index) => {
       return (
-        <StyledTagItem key={tag.title + index} className={tag.active ? "active" : ""} onClick={this.handleClick.bind(this, index)}>
+        <StyledTagItem key={tag.title + index} active={tag.active} onClick={this.handleClick.bind(this, index)}>
           {tag.title}
         </StyledTagItem>
       );
@@ -190,7 +127,7 @@ class WorkEnvironmentInteraction extends React.Component{
         </Flex>
 
         <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-        {renderCards(this.props.data.work_environment.tags)}
+        {renderCards(this.props.data)}
 
       </Container>
     )

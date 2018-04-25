@@ -1,0 +1,37 @@
+.module-container {
+  min-height: 500px;
+  padding: 4% 10% 9% 10%;
+  position: relative;
+}
+
+.chapter-container {
+  top: 268px;
+}
+
+h2 span {
+  color: #000;
+  position: relative;
+}
+
+h2 span:before {
+  content: '';
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  border-bottom: 1px dashed #000;
+}
+
+.chapter-text-container {
+  color: #fff;
+}
+
+.chapter-line {
+  background: #fff;
+  opacity: 1;
+}
+
+h3 {
+  color: #000;
+}
