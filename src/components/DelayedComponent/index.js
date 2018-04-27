@@ -10,7 +10,7 @@ export class DelayedComponent extends Component {
     }
 
     componentWillMount() {
-        var that = this;
+        let that = this;
         setTimeout(function() {
             that.show();
         }, that.props.wait);

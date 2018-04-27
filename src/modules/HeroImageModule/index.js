@@ -9,7 +9,6 @@ const ModuleContainer = styled.section`
   z-index: 1;
   margin: -1px 0 0;
   padding: 1px 0 0;
-  height: 100vh;
   max-height: 1350px;
   width: 100%;
   min-height: 550px;

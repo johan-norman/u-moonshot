@@ -6,10 +6,11 @@ import debounce from 'lodash/debounce'
 import { Flex, Box } from 'grid-styled'
 import H2 from '../../components/H2'
 import H3 from '../../components/H3'
-import ModuleContainer from '../../components/ModuleContainer'
+import Container from '../../components/Container'
 import SentenceFormContainer from '../../components/SentenceFormContainer'
 import RangeSlider from '../../components/RangeSlider'
 import Slider from 'react-rangeslider';
+import RecommendedationCards from '../RecommendationCards';
 
 class CareerInteraction extends React.Component{
 
@@ -126,9 +127,8 @@ class CareerInteraction extends React.Component{
 
     return(
       <div className="profile-section-container">
-        <ModuleContainer>
+        
           <Flex>
-            <Box width={1/2}/>
             <Box width={1/2}>
               <H3>
                 Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.
@@ -193,7 +193,8 @@ class CareerInteraction extends React.Component{
               </SentenceFormContainer>
             </Box>
           </Flex>
-        </ModuleContainer>
+          <RecommendedationCards data={this.props.data} rows={2} columns={4}></RecommendedationCards>
+ 
       </div>
     )
   }

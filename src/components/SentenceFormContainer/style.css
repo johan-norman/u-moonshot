@@ -1,10 +1,11 @@
   .sentence-form-container {
-  font-size: 5.2vw;
+  font-size:calc(32px + 2.6vw);
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   letter-spacing: -1px;
   line-height: 1.2em;
-  color: #7D7D7D;
+  color: #ffffff;
+  padding: 55px 0;
 }
 
 .sf-field {
@@ -12,10 +13,10 @@
   position: relative;
 }
 .sf-field a {
-  color: #484848;
-  border-bottom: 1px dashed #484848;
+  color: #FFD24C;
+  border-bottom: 1px dashed #FFD24C;
   cursor: pointer;
-  background: #fff;
+  background: transparent;
   line-height: inherit;
 } 
 .sf-field a:hover {
