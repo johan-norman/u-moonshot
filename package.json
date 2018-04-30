@@ -8,6 +8,8 @@
     "gsap": "^1.20.4",
     "history": "^4.7.2",
     "lodash": "^4.17.5",
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
     "react-charming": "^1.1.0",
     "react-dom": "^16.2.0",
@@ -24,8 +26,12 @@
     "styled-components": "^3.1.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

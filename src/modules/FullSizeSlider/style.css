@@ -1,5 +1,100 @@
 .card-image {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-}
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+
+.slider-container {
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  margin-top: 50px; }
+
+.slider-container .slider-inner-container {
+  background: #fff;
+  display: inline-block;
+  padding: 0px;
+  position: relative; }
+
+.slider-container .slick-slider {
+  display: inline-block;
+  position: relative;
+  z-index: 10; }
+
+.slider-container .slick-slide {
+  height: 660px; }
+
+.slick-slider .slick-arrow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  opacity: 0.64;
+  background: #026966;
+  border: 0;
+  padding: 0px;
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  outline: 0; }
+
+.slick-slider .slick-arrow:hover {
+  opacity: .8; }
+
+.slick-slider .slick-arrow:before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 21px;
+  left: 50%;
+  top: 50%;
+  margin-top: -10px;
+  margin-left: -6px; }
+
+.slick-slider .slick-arrow.slick-prev {
+  right: 102px;
+  bottom: 0;
+  z-index: 999; }
+
+.slick-slider .slick-arrow.slick-prev:before {
+  background: url(./right-arrow.svg);
+  transform: rotate(-180deg); }
+
+.slider-container .slick-arrow.slick-next {
+  margin-left: 116px; }
+
+.slick-slider .slick-arrow.slick-next:before {
+  background: url(./right-arrow.svg); }
+
+.slider-container .slick-arrow:active {
+  outline: 0; }
+
+.slider-container img {
+  user-select: none; }
+
+.full-size-slider-card {
+  position: relative;
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab; }
+
+.full-size-slider-card img {
+  user-select: none; }
+
+.full-size-slider-card .card-image {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 660px;
+  display: block; }
+
+.full-size-slider-card .card-text-container {
+  bottom: 20px;
+  left: 30px;
+  position: absolute;
+  color: #fff; }
+
+.full-size-slider-card h2 {
+  color: #fff;
+  margin-top: 0; }

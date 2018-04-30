@@ -1,0 +1,148 @@
+.slider-container {
+  overflow: hidden;
+  padding: 0 10% 100px 10%;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  /*# sourceMappingURL=slick.min.css.map */ }
+  .slider-container .slick-list, .slider-container .slick-slider, .slider-container .slick-track {
+    position: relative;
+    display: block; }
+  .slider-container .slick-loading .slick-slide, .slider-container .slick-loading .slick-track {
+    visibility: hidden; }
+  .slider-container .slick-slider {
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent; }
+  .slider-container .slick-list {
+    overflow: hidden;
+    margin: 0;
+    padding: 0; }
+  .slider-container .slick-list:focus {
+    outline: 0; }
+  .slider-container .slick-list.dragging {
+    cursor: pointer;
+    cursor: hand; }
+  .slider-container .slick-slider .slick-list, .slider-container .slick-slider .slick-track {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  .slider-container .slick-track {
+    top: 0;
+    left: 0; }
+  .slider-container .slick-track:after, .slider-container .slick-track:before {
+    display: table;
+    content: ''; }
+  .slider-container .slick-track:after {
+    clear: both; }
+  .slider-container .slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px; }
+  .slider-container [dir=rtl] .slick-slide {
+    float: right; }
+  .slider-container .slick-slide img {
+    display: block; }
+  .slider-container .slick-slide.slick-loading img {
+    display: none; }
+  .slider-container .slick-slide.dragging img {
+    pointer-events: none; }
+  .slider-container .slick-initialized .slick-slide {
+    display: block; }
+  .slider-container .slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent; }
+  .slider-container .slick-arrow.slick-hidden {
+    display: none; }
+  .slider-container .slider-inner-container {
+    background: #fff;
+    display: inline-block;
+    padding: 40px 0px 0px 0px;
+    margin-left: 10px;
+    position: relative; }
+    .slider-container .slider-inner-container:before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100%;
+      background: #fff;
+      left: -100px;
+      top: 0px; }
+    .slider-container .slider-inner-container:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100px;
+      width: 100px;
+      height: 100px;
+      background: #fff; }
+  .slider-container .slick-arrow {
+    position: absolute;
+    top: -110px;
+    width: 100px;
+    height: 100px;
+    opacity: 0.64;
+    background: #1FA22E;
+    border: 0;
+    padding: 0px;
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+    outline: 0; }
+    .slider-container .slick-arrow:hover {
+      opacity: .8; }
+    .slider-container .slick-arrow:before {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 21px;
+      left: 50%;
+      top: 50%;
+      margin-top: -10px;
+      margin-left: -6px; }
+    .slider-container .slick-arrow.slick-prev {
+      margin-left: 15px; }
+      .slider-container .slick-arrow.slick-prev:before {
+        background: url(./right-arrow.svg);
+        transform: rotate(-180deg); }
+    .slider-container .slick-arrow.slick-next {
+      margin-left: 116px; }
+      .slider-container .slick-arrow.slick-next:before {
+        background: url(./right-arrow.svg); }
+    .slider-container .slick-arrow:active {
+      outline: 0; }
+  .slider-container .card-container img {
+    user-select: none; }
+
+.slider-card .card-image {
+  background: #EAEAEA;
+  height: 320px; }
+
+.slider-card .card-text-container p {
+  font-size: 15px;
+  color: #9C9C9C;
+  margin-bottom: 0; }
+
+.slider-card .card-text-container h3 {
+  font-size: 18px;
+  color: #595959;
+  letter-spacing: 0;
+  margin: 0; }
+
+.cards-slider .slick-slide {
+  float: left;
+  margin-right: 15px; }
+
+.cards-slider .slick-list {
+  overflow: visible; }
