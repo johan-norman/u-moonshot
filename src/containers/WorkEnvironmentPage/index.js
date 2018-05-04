@@ -36,7 +36,7 @@ export class WorkEnvironmentPage extends Component {
           data={this.props.data}/>
         </Container>
         </HeaderImage>
-        <NewMemberModule title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
+        <NewMemberModule color="dark" title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
         <CardSlider cards={this.props.data.cards_data} />
         <FullSizeSlider cards={this.props.data.cards_data} />
         <CrossSiteLinks />

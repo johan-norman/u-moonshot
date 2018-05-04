@@ -9,37 +9,7 @@ import OnVisible from 'react-on-visible';
 import Charming from 'react-charming'
 import { Link } from 'react-router-dom'
 
-
-const ImageBoxContainer = styled.section`
-  min-height: 440px;
-  .image-box-container {
-    height:440px;
-    align-content: stretch;
-  }
-  .image-box {
-    background: rgba(0,0,0,.5);
-    height: 100%;
-    position:relative;
-    border-right: 1px solid #fff;
-  }
-  .image-box-content {
-    color #fff;
-    span {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-    h2 {
-      position: absolute;
-      bottom: 0;
-      left: 20px;
-      letter-spacing: -1px;
-    }
-  }
-  a {
-    text-decoration: none;
-  }
-`;
+import './style.css';
 
 class CrossSiteLinks extends React.Component{
 
@@ -68,9 +38,9 @@ class CrossSiteLinks extends React.Component{
 
   render() {
     return(
-      <ImageBoxContainer>
-        <Flex className="image-box-container" alignItems="bottom" justifyContent="bottom">
-          <Box width={1/4} className="image-box">
+      <div className="image-box-wrap">
+        <Flex className="image-box-container" alignItems="bottom" justifyContent="bottom" flexDirection={['column', 'unset']}>
+          <Box width={[1, 1/2, 1/4]} className="image-box" style={{backgroundImage: 'url(/x0279.jpg)'}}>
             <Link to="/karriar">
               <div className="image-box-content">
                 <span>01</span>
@@ -78,7 +48,7 @@ class CrossSiteLinks extends React.Component{
               </div>
             </Link>
           </Box>
-          <Box width={1/4} className="image-box">
+          <Box width={[1, 1/2, 1/4]} className="image-box" style={{backgroundImage: 'url(/x0374.jpg)'}}>
             <Link to="/arbetsmiljo">
               <div className="image-box-content">
                 <span>02</span>
@@ -86,7 +56,7 @@ class CrossSiteLinks extends React.Component{
               </div>
             </Link>
           </Box>
-          <Box width={1/4} className="image-box">
+          <Box width={[1, 1/2, 1/4]} className="image-box" style={{backgroundImage: 'url(/x0863.jpg)'}}>
             <Link to="/fortroendevald">
               <div className="image-box-content">
                 <span>03</span>
@@ -94,7 +64,7 @@ class CrossSiteLinks extends React.Component{
               </div>
             </Link>
           </Box>
-          <Box width={1/4} className="image-box">
+          <Box width={[1, 1/2, 1/4]} className="image-box" style={{backgroundImage: 'url(/x0959.jpg)'}}>
             <Link to="/bli-medlem">
               <div className="image-box-content">
                 <span>04</span>
@@ -103,7 +73,7 @@ class CrossSiteLinks extends React.Component{
             </Link>
           </Box>
         </Flex>
-      </ImageBoxContainer>
+      </div>
 
     )
   }

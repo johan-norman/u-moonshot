@@ -1,0 +1,102 @@
+.new-member-module {
+  padding: 0 70px 50px 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* FF 4-18 */
+  /* FF 19+ */
+  /* IE 10+ */ }
+  .new-member-module.dark {
+    background-image: url(/new_member_module_bckg-dark.jpg); }
+    .new-member-module.dark .tabs-nav {
+      background: #FDB9AF; }
+    .new-member-module.dark button {
+      background: #039073; }
+    .new-member-module.dark .tab button {
+      background: transparent;
+      border: 2px solid #C6C6C6;
+      color: #000000; }
+  .new-member-module.light {
+    background-image: url(/new_member_module_bckg-light.jpg); }
+  .new-member-module a {
+    font-size: 12px; }
+  .new-member-module .new-member-h2 {
+    width: 83%;
+    font-size: 48px;
+    letter-spacing: -3px; }
+  .new-member-module .new-member-p {
+    width: 83%;
+    margin-top: -15px;
+    margin-bottom: 70px; }
+  .new-member-module .phone-tabs {
+    background: #ffffff; }
+  .new-member-module .tab-container .tab.react-tabs__tab-panel--selected {
+    padding: 50px;
+    max-height: 350px;
+    overflow-y: scroll; }
+    .new-member-module .tab-container .tab.react-tabs__tab-panel--selected a {
+      color: #484848; }
+  .new-member-module .tab .input-wrap {
+    position: relative; }
+  .new-member-module .tab input {
+    width: 100%;
+    padding: 7px 7px 7px 30px;
+    margin: 0 0 16px 0;
+    box-sizing: border-box;
+    font-size: 26px;
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid #757575;
+    background: transparent;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 2px 9px; }
+    .new-member-module .tab input:focus {
+      outline: none; }
+    .new-member-module .tab input::placeholder {
+      color: #959595; }
+  .new-member-module .tab p {
+    font-size: 26px; }
+  .new-member-module .tab .icon-cellphone {
+    position: absolute;
+    top: 4px;
+    width: 18px;
+    height: 30px;
+    background-image: url(/cellphone-iphone.png); }
+  .new-member-module input:focus::-webkit-input-placeholder {
+    color: transparent; }
+  .new-member-module input:focus:-moz-placeholder {
+    color: transparent; }
+  .new-member-module input:focus::-moz-placeholder {
+    color: transparent; }
+  .new-member-module input:focus:-ms-input-placeholder {
+    color: transparent; }
+  .new-member-module .tab-content Button {
+    margin-right: 25px; }
+  .new-member-module .tabs-nav {
+    display: flex;
+    justify-content: space-evenly;
+    background: #323648;
+    margin: 0;
+    list-style: none;
+    padding: 0; }
+    .new-member-module .tabs-nav li {
+      line-height: 61px;
+      text-decoration: none;
+      color: #888A94;
+      font-size: 18px;
+      text-align: center;
+      cursor: pointer; }
+    .new-member-module .tabs-nav .react-tabs__tab--selected {
+      position: relative;
+      color: #ffffff; }
+      .new-member-module .tabs-nav .react-tabs__tab--selected:after {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        margin-left: -10px;
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 11px solid #ffffff; }

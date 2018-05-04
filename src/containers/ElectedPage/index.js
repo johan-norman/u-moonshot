@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 
-import HeroImageModule from '../../modules/HeroImageModule'
+import HeaderImage from '../../modules/HeaderImage'
 import ElectedInteraction from '../../modules/ElectedInteraction'
 import NewMemberModule from '../../modules/NewMemberModule'
 import CrossSiteLinks from '../../modules/CrossSiteLinksModule'
 import CardSlider from '../../modules/CardSlider'
 import FullSizeSlider from '../../modules/FullSizeSlider'
+import PageTitle from '../../components/PageTitle'
+import Container from '../../components/Container'
 
 const PageContainer = styled.div`
 
@@ -25,10 +27,14 @@ export class ElectedPage extends Component {
   render() {
     return (
       <PageContainer>
-        <HeroImageModule text="Skapa arbetsplatsen du vill jobba på" />
-        <ElectedInteraction 
+        <HeaderImage img='/x0863.jpg'>
+        <Container>
+          <PageTitle pageNumber="03">Förtroendevald</PageTitle>
+          <ElectedInteraction 
           onDataChange={this.handleDataChange} 
           data={this.props.data}/>
+        </Container>
+        </HeaderImage>
         <NewMemberModule title="Bli medlem och skapa förändring" subtext="Tar du steget till att bli förtroendevald får du coaching, verktyg och utbildningar. Bli medlem idag så bjuder på avgiften i tre månader." />
         <CardSlider cards={this.props.data.cards_data} />
         <FullSizeSlider cards={this.props.data.cards_data} />

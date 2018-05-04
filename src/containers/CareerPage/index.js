@@ -32,7 +32,7 @@ class CareerPage extends Component {
   render() {
     return (
       <CareerContainer>
-        <HeaderImage img='/_x0279.jpg'>
+        <HeaderImage img='/x0279.jpg'>
         <Container>
           <PageTitle pageNumber="01">Karriär</PageTitle>
           <CareerInteraction 
