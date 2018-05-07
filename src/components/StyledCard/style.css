@@ -3,6 +3,7 @@
 }
 
 .styled-card  .card-image {
+	display: block;
 	background: #EAEAEA;
 	height: 320px;
 }

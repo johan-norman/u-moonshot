@@ -9,12 +9,14 @@ import WorkEnvironmentPage from "../WorkEnvironmentPage";
 import ElectedPage from "../ElectedPage";
 import BecomeMember from "../BecomeMemberPage";
 import Profile from "../ProfilePage";
+import ArticlePage from "../ArticlePage";
 
 import PageHeaderModule from "../../modules/PageHeaderModule";
 
 import State from "../../lib/DataHandlers";
 import { default_data } from "../../lib/default_data";
 import { cards_data } from "../../lib/default_data";
+import { articles_data } from "../../lib/default_data";
 
 class App extends Component {
     constructor(props) {
@@ -143,6 +145,17 @@ class App extends Component {
                                         <ElectedPage
                                             data={this.data}
                                             onDataChange={this.handleDataChange}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    
+                                    path="/articles"
+                                    render={(match) => (
+                                        <ArticlePage
+                                            data={this.data}
+                                            match={match.match}
+                                            articles_data={articles_data}
                                         />
                                     )}
                                 />

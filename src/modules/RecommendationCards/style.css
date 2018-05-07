@@ -1,3 +1,7 @@
 .recommendation-card {
 	z-index: 999;
 }
+
+.styled-card .card-image {
+	display: block;
+}

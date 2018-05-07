@@ -9,7 +9,7 @@ import H2 from '../../components/H2'
 import Container from '../../components/Container'
 import StyledTagItem from '../../components/StyledTagItem'
 import RecommendedTag from '../../components/RecommendedTag'
-import RecommendedationCards from '../RecommendationCards'
+import RecommendationCards from '../RecommendationCards'
 
 import './style.css';
 
@@ -77,7 +77,7 @@ class WorkEnvironmentInteraction extends React.Component{
         </Flex>
 
         <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-        <RecommendedationCards data={this.props.data} rows={2} columns={4}></RecommendedationCards>
+        <RecommendationCards data={this.props.data} rows={2} columns={4}></RecommendationCards>
 
       </div>
     )

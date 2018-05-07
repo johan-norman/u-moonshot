@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 import DelayedComponent from '../../components/DelayedComponent';
 import StyledCard from '../../components/StyledCard';
 import { Flex, Box } from 'grid-styled'
@@ -44,11 +45,11 @@ export class RecommendationCards extends Component {
 		      <DelayedComponent wait={waitCounter*110} key={card.title + index}>
 		      <Box width={300} mx={"8px"} className="show animated-box">
 		        <StyledCard key={card.title + index}>
-		            <div onClick={() => this.handleClick(card.id)} className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
-		            <div className="card-text-container">
+		            <Link to={`articles/${card.id}`}  onClick={() => this.handleClick(card.id)} className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></Link>
+		            <a className="card-text-container" >
 		              <p className="category-text">{card.category}</p>
 		              <h3>{card.title}</h3>
-		            </div>
+		            </a>
 		        </StyledCard>
 		      </Box>
 		      </DelayedComponent>

@@ -27,9 +27,11 @@ class CareerInteraction extends React.Component{
       salaryValue: this.props.data.user_data.career.salary,
       workTitle: this.props.data.user_data.career.job_title,
       experienceValue: this.props.data.user_data.career.experience,
+      showRows: 2
     };
 
     this.handleDataChange = debounce(this.handleDataChange.bind(this), 500);
+    this.showMore = this.showMore.bind(this);
   }
 
   handleDataChange(key, payload) {
@@ -113,6 +115,12 @@ class CareerInteraction extends React.Component{
       }
   }
 
+  showMore() {
+    this.setState({
+      showRows: this.state.showRows+1
+    })
+  }
+
   render() {
 
     const salaryValue = this.state.salaryValue;
@@ -193,7 +201,8 @@ class CareerInteraction extends React.Component{
               </SentenceFormContainer>
             </Box>
           </Flex>
-          <RecommendedationCards data={this.props.data} rows={2} columns={4}></RecommendedationCards>
+          <RecommendedationCards data={this.props.data} rows={this.state.showRows} columns={4}></RecommendedationCards>
+          <button onClick={this.showMore}>More</button>
  
       </div>
     )

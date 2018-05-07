@@ -12,9 +12,12 @@ import StyledCard from '../../components/StyledCard'
 import RecommendedTag from '../../components/RecommendedTag'
 import Preamble from '../../components/Preamble'
 import RangeSlider from '../../components/RangeSlider'
+import Tooltip from '../../components/Tooltip'
 
 import orderBy from 'lodash/orderBy'
 import debounce from 'lodash/debounce'
+
+import './style.css'
 
 class ElectedInteraction extends React.Component{
 
@@ -192,7 +195,8 @@ class ElectedInteraction extends React.Component{
             <div className="slider-wrapper">
 
               <RangeSlider>
-                <div className="question-label">En trivsam arbetsmiljö</div>
+              
+                <div className="question-label">En trivsam arbetsmiljö<Tooltip text="This is a tooltip text. It could be a short/long explanation of the element."></Tooltip></div>
                 <div className="slider">
                   <div className="steps">
                     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -215,7 +219,7 @@ class ElectedInteraction extends React.Component{
               </RangeSlider>
 
               <RangeSlider>
-                <div className="question-label">En jämlik arbetsplats</div>
+                <div className="question-label">En jämlik arbetsplats<Tooltip text="A short one"></Tooltip></div>
                 <div className="slider">
                   <div className="steps">
                     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -238,7 +242,7 @@ class ElectedInteraction extends React.Component{
               </RangeSlider>
 
               <RangeSlider>
-                <div className="question-label">Att ligga i framkant i arbetsplatsfrågor</div>
+                <div className="question-label">Att ligga i framkant i arbetsplatsfrågor<Tooltip text="This is a tooltip text again. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "></Tooltip></div>
                 <div className="slider">
                   <div className="steps">
                     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -261,7 +265,7 @@ class ElectedInteraction extends React.Component{
               </RangeSlider>
 
               <RangeSlider>
-                <div className="question-label">Möjlighet att påverka</div>
+                <div className="question-label">Möjlighet att påverka<Tooltip text="A short one"></Tooltip></div>
                 <div className="slider">
                   <div className="steps">
                     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -284,7 +288,7 @@ class ElectedInteraction extends React.Component{
               </RangeSlider>
 
               <RangeSlider>
-                <div className="question-label">En säker arbetsmiljö</div>
+                <div className="question-label">En säker arbetsmiljö<Tooltip text="A short one"></Tooltip></div>
                 <div className="slider">
                   <div className="steps">
                     <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
