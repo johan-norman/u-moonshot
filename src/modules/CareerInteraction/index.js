@@ -133,17 +133,23 @@ class CareerInteraction extends React.Component{
       );
     })
 
+    const Cards = this.props.showCards ? (
+      <RecommendedationCards data={this.props.data} rows={this.state.showRows} columns={4}></RecommendedationCards>
+    ) : ( false );
+
+    const subtitle = this.props.showCards ? (
+     <Flex>
+        <Box width={1/2}>
+          <H3>
+            Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.
+          </H3>
+        </Box>
+      </Flex>
+    ) : ( false );
+
     return(
       <div className="profile-section-container">
-        
-          <Flex>
-            <Box width={1/2}>
-              <H3>
-                Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.
-              </H3>
-            </Box>
-          </Flex>
-
+          {subtitle}
           <Flex>
             <Box width={3/3}>
               <SentenceFormContainer>
@@ -201,7 +207,7 @@ class CareerInteraction extends React.Component{
               </SentenceFormContainer>
             </Box>
           </Flex>
-          <RecommendedationCards data={this.props.data} rows={this.state.showRows} columns={4}></RecommendedationCards>
+          {Cards}
           <button onClick={this.showMore}>More</button>
  
       </div>

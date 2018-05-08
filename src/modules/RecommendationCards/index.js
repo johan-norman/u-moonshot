@@ -45,7 +45,7 @@ export class RecommendationCards extends Component {
 		      <DelayedComponent wait={waitCounter*110} key={card.title + index}>
 		      <Box width={300} mx={"8px"} className="show animated-box">
 		        <StyledCard key={card.title + index}>
-		            <Link to={`articles/${card.id}`}  onClick={() => this.handleClick(card.id)} className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></Link>
+		            <Link to={`/articles/${card.id}`}  onClick={() => this.handleClick(card.id)} className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></Link>
 		            <a className="card-text-container" >
 		              <p className="category-text">{card.category}</p>
 		              <h3>{card.title}</h3>

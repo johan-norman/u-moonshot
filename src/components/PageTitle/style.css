@@ -1,4 +1,6 @@
 .page-title {
+	position: relative;
+	left: -30px;
 	font-size:calc(24px + 0.4vw);
 	font-weight: 300;
 	color: #ffffff;
@@ -8,4 +10,10 @@
 	color: #FFD24C;
 	font-weight: 700;
 	margin-right: 20px;
+}
+
+@media only screen and (max-width: 1370px) {
+	.page-title {
+		left: auto;
+	}
 }

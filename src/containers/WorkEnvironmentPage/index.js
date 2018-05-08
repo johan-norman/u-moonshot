@@ -33,7 +33,8 @@ export class WorkEnvironmentPage extends Component {
           <PageTitle pageNumber="02">Arbetsmiljö</PageTitle>
           <WorkEnvironmentInteraction 
           onDataChange={this.handleDataChange} 
-          data={this.props.data}/>
+          data={this.props.data}
+          showCards={true}/>
         </Container>
         </HeaderImage>
         <NewMemberModule color="dark" title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />

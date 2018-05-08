@@ -32,7 +32,8 @@ export class ElectedPage extends Component {
           <PageTitle pageNumber="03">Förtroendevald</PageTitle>
           <ElectedInteraction 
           onDataChange={this.handleDataChange} 
-          data={this.props.data}/>
+          data={this.props.data}
+          showCards={true}/>
         </Container>
         </HeaderImage>
         <NewMemberModule title="Bli medlem och skapa förändring" subtext="Tar du steget till att bli förtroendevald får du coaching, verktyg och utbildningar. Bli medlem idag så bjuder på avgiften i tre månader." />

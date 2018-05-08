@@ -184,6 +184,13 @@ class ElectedInteraction extends React.Component{
     const impactValue = this.state.impact_value;
     const safeWorkspaceValue = this.state.safe_workspace_value;
 
+    const Cards = this.props.showCards ? (
+      <Box width={1/2} mt={120}>
+        <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
+        {this.renderCards(this.props.data)}
+      </Box>
+    ) : (false);
+
     return(
       <Container className="container">
 
@@ -313,10 +320,7 @@ class ElectedInteraction extends React.Component{
             </div>
 
           </Box>
-          <Box width={1/2} mt={120}>
-            <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-            {this.renderCards(this.props.data)}
-          </Box>
+          {Cards}
         </Flex>
 
       </Container>

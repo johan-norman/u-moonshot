@@ -53,7 +53,12 @@ class WorkEnvironmentInteraction extends React.Component{
         </StyledTagItem>
       );
     })
-
+    const Cards = this.props.showCards ? (
+      <div>
+      <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
+      <RecommendationCards data={this.props.data} rows={2} columns={4}></RecommendationCards>
+      </div>
+    ) : (false);
 
 
     return(
@@ -65,7 +70,7 @@ class WorkEnvironmentInteraction extends React.Component{
           </Box>
           <Box width={1/3}>
             <div>
-              <p>lorem ipsum</p>
+              <p></p>
             </div>
           </Box>
         </Flex>
@@ -76,8 +81,7 @@ class WorkEnvironmentInteraction extends React.Component{
           </Box>
         </Flex>
 
-        <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-        <RecommendationCards data={this.props.data} rows={2} columns={4}></RecommendationCards>
+        {Cards}
 
       </div>
     )

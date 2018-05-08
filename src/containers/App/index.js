@@ -21,7 +21,14 @@ import { articles_data } from "../../lib/default_data";
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { isFinishedCareerEnter: false };
+        this.state = { 
+            isFinishedCareerEnter: false,
+            data: {
+                user_data: default_data, 
+                cards_data: cards_data
+            }
+            
+        };
         this.handleSelectTag = tag => {
             if (!this.state.selectedTags.includes(tag)) {
                 this.setState({
@@ -36,49 +43,55 @@ class App extends Component {
                 });
             }
         };
-        this.data = { user_data: default_data, cards_data: cards_data };
+
         this.handleDataChange = this.handleDataChange.bind(this);
     }
 
     handleDataChange(key, payload) {
         console.log(key, payload);
         if (key === "career") {
-            this.data.user_data.career = merge(
-                this.data.user_data.career,
+            let newState = Object.assign({}, this.state);
+            newState.data.user_data.career = merge(
+                this.state.data.user_data.career,
                 payload
             );
+            this.setState(newState);
         }
 
         if (key === "work_environment") {
-            let tags = this.data.user_data.work_environment.tags;
+            let tags = this.state.data.user_data.work_environment.tags;
             let index = payload;
             tags[index].active = !tags[index].active;
-            this.data.user_data.work_environment.tags = tags;
-            console.log(this.data.user_data.work_environment.tags);
+            let newState = Object.assign({}, this.state);
+            newState.data.user_data.work_environment.tags = tags;
+            this.setState(newState);
+            console.log(this.state.data.user_data.work_environment.tags);
         }
         if (key === "elected") {
-            this.data.user_data.elected = merge(
-                this.data.user_data.elected,
+            let newState = Object.assign({}, this.state);
+            newState.data.user_data.elected = merge(
+                this.state.data.user_data.elected,
                 payload
             );
+            this.setState(newState);
         }
-        localStorage.setItem("storedData", JSON.stringify(this.data.user_data));
+        localStorage.setItem("storedData", JSON.stringify(this.state.data.user_data));
 
-        this.data.cards_data.forEach(card => {
+        this.state.data.cards_data.forEach(card => {
             let career_score = 0;
             const salaryMin = card.salary_range[0];
             const salaryMax = card.salary_range[1];
             const primaryTags = card.work_tags_primary;
             const secondaryTags = card.work_tags_secondary;
-            if (primaryTags.includes(this.data.user_data.career.job_title)) {
+            if (primaryTags.includes(this.state.data.user_data.career.job_title)) {
                 career_score += 50;
             }
-            if (secondaryTags.includes(this.data.user_data.career.job_title)) {
+            if (secondaryTags.includes(this.state.data.user_data.career.job_title)) {
                 career_score += 20;
             }
             card.career_score = career_score;
         });
-        console.log(this.data.cards_data);
+        console.log(this.state.data.cards_data);
     }
 
     componentWillMount() {
@@ -113,14 +126,14 @@ class App extends Component {
                                     render={() =>
                                         this.state.isFinishedCareerEnter ? (
                                             <WorkEnvironmentPage
-                                                data={this.data}
+                                                data={this.state.data}
                                                 onDataChange={
                                                     this.handleDataChange
                                                 }
                                             />
                                         ) : (
                                             <CareerPage
-                                                data={this.data}
+                                                data={this.state.data}
                                                 onDataChange={
                                                     this.handleDataChange
                                                 }
@@ -133,7 +146,7 @@ class App extends Component {
                                     path="/arbetsmiljo"
                                     render={() => (
                                         <WorkEnvironmentPage
-                                            data={this.data}
+                                            data={this.state.data}
                                             onDataChange={this.handleDataChange}
                                         />
                                     )}
@@ -143,7 +156,7 @@ class App extends Component {
                                     path="/fortroendevald"
                                     render={() => (
                                         <ElectedPage
-                                            data={this.data}
+                                            data={this.state.data}
                                             onDataChange={this.handleDataChange}
                                         />
                                     )}
@@ -153,7 +166,7 @@ class App extends Component {
                                     path="/articles"
                                     render={(match) => (
                                         <ArticlePage
-                                            data={this.data}
+                                            data={this.state.data}
                                             match={match.match}
                                             articles_data={articles_data}
                                         />
@@ -167,7 +180,12 @@ class App extends Component {
                                 <Route
                                     exact
                                     path="/profil"
-                                    component={Profile}
+                                    render={() => (
+                                        <Profile
+                                            data={this.state.data}
+                                            onDataChange={this.handleDataChange}
+                                        />
+                                    )}
                                 />
                             </Switch>
                         </div>

@@ -1,0 +1,17 @@
+#profile-page {
+  background: #323648; }
+
+#profile-header {
+  background-image: url(/profile_page-bckg.png);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  padding: 230px 30px 100px 30px; }
+
+#profile-career {
+  background: #2C3040; }
+
+#profile-elected {
+  background: #2C3040; }
+
+.profile-section {
+  padding: 100px 0; }
