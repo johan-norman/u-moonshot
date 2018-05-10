@@ -30,6 +30,37 @@ class WorkEnvironmentInteraction extends React.Component{
   }
 
   componentDidMount() {
+    if (!this.props.data.user_data.work_environment.user_entered_data) {
+      this.state.tagsData.map((tag, index) => {
+        return (tag.active = false);
+      });
+      let newState = Object.assign({}, this.state);
+      const self = this;
+      let count = -1;
+      const randomTags = Array.from({length: 6}, () => this.getRandomInt(0, self.state.tagsData.length-1));
+      function myFunction() {
+          count++;
+          if(count > randomTags.length - 1) {
+            clearInterval(timeout);
+          }
+          else {
+            newState.tagsData[randomTags[count]].active = true;
+            self.setState(newState);
+          }
+      }
+      const timeout = setInterval(myFunction, 300);
+    }
+  }
+
+  getRandomInt(min, max) {
+      if (max < min) {
+          // Swap min and max
+          [min, max] = [min, max];
+      }
+
+      // Generate random number n, where min <= n <= max
+      let range = max - min + 1;
+      return Math.floor(Math.random() * range) + min;
   }
 
   handleClick = index => {
@@ -48,7 +79,7 @@ class WorkEnvironmentInteraction extends React.Component{
 
     const renderTags = this.state.tagsData.map((tag, index) => {
       return (
-        <StyledTagItem key={tag.title + index} active={tag.active} onClick={this.handleClick.bind(this, index)}>
+        <StyledTagItem key={tag.title + index} active={tag.active} onClick={this.handleClick.bind(this, index)} hovered={tag.hovered}>
           {tag.title}
         </StyledTagItem>
       );
@@ -56,7 +87,7 @@ class WorkEnvironmentInteraction extends React.Component{
     const Cards = this.props.showCards ? (
       <div>
       <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-      <RecommendationCards data={this.props.data} rows={2} columns={4}></RecommendationCards>
+      <RecommendationCards data={this.props.data} rows={2} columns={4} scoreBy='environment' onCardClick={this.props.onCardClick}></RecommendationCards>
       </div>
     ) : (false);
 

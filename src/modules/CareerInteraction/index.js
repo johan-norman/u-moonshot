@@ -4,6 +4,7 @@ import Charming from 'react-charming'
 import { TimelineMax, TweenMax, Elastic } from 'gsap'
 import debounce from 'lodash/debounce'
 import { Flex, Box } from 'grid-styled'
+import delay from 'lodash/delay';
 import H2 from '../../components/H2'
 import H3 from '../../components/H3'
 import Container from '../../components/Container'
@@ -34,8 +35,46 @@ class CareerInteraction extends React.Component{
     this.showMore = this.showMore.bind(this);
   }
 
+  componentDidMount() {
+    if (!this.props.data.user_data.career.user_entered_data) {
+      const oldState = this.state;
+      const self = this;
+      let count = 0;
+      const randomSalaries = Array.from({length: 12}, () => this.getRandomInt(20000, 50000));
+      const randomWorkTitles = Array.from({length: 12}, () => this.getRandomInt(0, 50));
+      const randomExperience = Array.from({length: 12}, () => this.getRandomInt(1, 30));
+      function myFunction() {
+          count++;
+          if(count > 11) {
+            self.setState(oldState);
+            clearInterval(timeout);
+          }
+          else {
+            self.setState({
+              salaryValue: randomSalaries[count],
+              workTitle: self.props.data.user_data.work_titles[randomWorkTitles[count]],
+              experienceValue: randomExperience[count]
+            }); 
+          }
+      }
+      const timeout = setInterval(myFunction, 300);
+    }
+  }
+
+  getRandomInt(min, max) {
+      if (max < min) {
+          // Swap min and max
+          [min, max] = [min, max];
+      }
+
+      // Generate random number n, where min <= n <= max
+      let range = max - min + 1;
+      return Math.floor(Math.random() * range) + min;
+  }
+
   handleDataChange(key, payload) {
     this.props.onDataChange(key, payload);
+    this.forceUpdate();
   }
 
   toggleWorkDropdown(item) {
@@ -134,18 +173,23 @@ class CareerInteraction extends React.Component{
     })
 
     const Cards = this.props.showCards ? (
-      <RecommendedationCards data={this.props.data} rows={this.state.showRows} columns={4}></RecommendedationCards>
+      <div>
+        <RecommendedationCards data={this.props.data} rows={this.state.showRows} columns={4} sortBy='career' onCardClick={this.props.onCardClick}></RecommendedationCards>
+        <button className="load-more-button" onClick={this.showMore}>Visa fler</button>
+      </div>
     ) : ( false );
 
     const subtitle = this.props.showCards ? (
-     <Flex>
-        <Box width={1/2}>
-          <H3>
-            Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.
-          </H3>
-        </Box>
-      </Flex>
+       <Flex>
+          <Box width={1/2}>
+            <H3>
+              Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.
+            </H3>
+          </Box>
+        </Flex>
+
     ) : ( false );
+
 
     return(
       <div className="profile-section-container">
@@ -208,7 +252,7 @@ class CareerInteraction extends React.Component{
             </Box>
           </Flex>
           {Cards}
-          <button onClick={this.showMore}>More</button>
+          
  
       </div>
     )

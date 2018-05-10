@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Slider from 'react-slick'
+import { Link } from "react-router-dom";
 import Container from '../../components/Container'
 import './style.css';
 
@@ -10,9 +11,15 @@ class CardSlider extends React.Component{
 
   constructor(props){
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+  }
+
+  handleClick(id) {
+    this.props.onCardClick(id);
   }
 
   render() {
@@ -51,7 +58,7 @@ class CardSlider extends React.Component{
     const renderCards = this.props.cards.map((card, index) => {
       return (
           <div className="slider-card" key={card.title + index}>
-              <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
+          <Link to={`/articles/${card.id}`}  onClick={() => this.handleClick(card.id)} className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></Link>
               <div className="card-text-container">
                 <p className="category-text">{card.category}</p>
                 <h3>{card.title}</h3>

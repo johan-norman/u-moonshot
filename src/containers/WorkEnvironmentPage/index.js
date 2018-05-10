@@ -25,6 +25,8 @@ export class WorkEnvironmentPage extends Component {
     this.props.onDataChange(key, payload);
   }
 
+
+
   render() {
     return (
       <PageContainer>
@@ -32,13 +34,14 @@ export class WorkEnvironmentPage extends Component {
         <Container>
           <PageTitle pageNumber="02">Arbetsmiljö</PageTitle>
           <WorkEnvironmentInteraction 
-          onDataChange={this.handleDataChange} 
+          onDataChange={this.handleDataChange}
+          onCardClick={this.props.onCardClick} 
           data={this.props.data}
           showCards={true}/>
         </Container>
         </HeaderImage>
-        <NewMemberModule color="dark" title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
-        <CardSlider cards={this.props.data.cards_data} />
+        <NewMemberModule color="light" title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
+        <CardSlider cards={this.props.data.cards_data}  onCardClick={this.props.onCardClick}/>
         <FullSizeSlider cards={this.props.data.cards_data} />
         <CrossSiteLinks />
       </PageContainer>

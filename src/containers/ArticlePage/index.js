@@ -50,7 +50,7 @@ const ArticlePage = (props) => (
 	                        match={match}
 	                    />
 	            )} />
-	          <RecommendationCards rows={1} columns={4} data={props.data}></RecommendationCards>
+	          <RecommendationCards rows={1} columns={4} data={props.data} onCardClick={props.onCardClick}></RecommendationCards>
 	        </Container>
       </HeaderImage>
       <NewMemberModule title="Bli medlem och skapa förändring" subtext="Tar du steget till att bli förtroendevald får du coaching, verktyg och utbildningar. Bli medlem idag så bjuder på avgiften i tre månader." />   

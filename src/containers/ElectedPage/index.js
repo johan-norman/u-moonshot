@@ -32,6 +32,7 @@ export class ElectedPage extends Component {
           <PageTitle pageNumber="03">Förtroendevald</PageTitle>
           <ElectedInteraction 
           onDataChange={this.handleDataChange} 
+          onCardClick={this.props.onCardClick}
           data={this.props.data}
           showCards={true}/>
         </Container>

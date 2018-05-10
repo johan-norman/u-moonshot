@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import merge from "lodash/merge";
+import find from 'lodash/find'
 
 import HomePage from "../HomePage";
 import CareerPage from "../CareerPage";
@@ -12,22 +13,20 @@ import Profile from "../ProfilePage";
 import ArticlePage from "../ArticlePage";
 
 import PageHeaderModule from "../../modules/PageHeaderModule";
+import Footer from '../../modules/Footer'
 
 import State from "../../lib/DataHandlers";
 import { default_data } from "../../lib/default_data";
 import { cards_data } from "../../lib/default_data";
 import { articles_data } from "../../lib/default_data";
 
+import './style.css';
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            isFinishedCareerEnter: false,
-            data: {
-                user_data: default_data, 
-                cards_data: cards_data
-            }
-            
+            isFinishedCareerEnter: false 
         };
         this.handleSelectTag = tag => {
             if (!this.state.selectedTags.includes(tag)) {
@@ -43,62 +42,102 @@ class App extends Component {
                 });
             }
         };
-
+        this.data = { user_data: default_data, cards_data: cards_data };
         this.handleDataChange = this.handleDataChange.bind(this);
     }
 
-    handleDataChange(key, payload) {
+    handleDataChange(key, payload, preview) {
         console.log(key, payload);
         if (key === "career") {
-            let newState = Object.assign({}, this.state);
-            newState.data.user_data.career = merge(
-                this.state.data.user_data.career,
+            if (!this.data.user_data.career.user_entered_data) this.data.user_data.career.user_entered_data = true;
+            this.data.user_data.career = merge(
+                this.data.user_data.career,
                 payload
             );
-            this.setState(newState);
         }
 
         if (key === "work_environment") {
-            let tags = this.state.data.user_data.work_environment.tags;
+            if (!this.data.user_data.work_environment.user_entered_data) this.data.user_data.work_environment.user_entered_data = true;
+            let tags = this.data.user_data.work_environment.tags;
             let index = payload;
             tags[index].active = !tags[index].active;
-            let newState = Object.assign({}, this.state);
-            newState.data.user_data.work_environment.tags = tags;
-            this.setState(newState);
-            console.log(this.state.data.user_data.work_environment.tags);
+            this.data.user_data.work_environment.tags = tags;
+            console.log(this.data.user_data.work_environment.tags);
         }
         if (key === "elected") {
-            let newState = Object.assign({}, this.state);
-            newState.data.user_data.elected = merge(
-                this.state.data.user_data.elected,
+            if (preview == 'preview') {
+                this.data.user_data.elected.user_entered_data = false;
+            }
+            else {
+                this.data.user_data.elected.user_entered_data = true;
+            }
+            this.data.user_data.elected = merge(
+                this.data.user_data.elected,
                 payload
             );
-            this.setState(newState);
         }
-        localStorage.setItem("storedData", JSON.stringify(this.state.data.user_data));
+        localStorage.setItem("storedData", JSON.stringify(this.data.user_data));
 
-        this.state.data.cards_data.forEach(card => {
+        this.data.cards_data.forEach(card => {
             let career_score = 0;
+            const coefficientExperience = 5;
+            const coefficientSalary = 1;
+            const coefficientCareer = 1;
+
             const salaryMin = card.salary_range[0];
             const salaryMax = card.salary_range[1];
+            const salaryMedian = (salaryMin + salaryMax) / 2;
             const primaryTags = card.work_tags_primary;
             const secondaryTags = card.work_tags_secondary;
-            if (primaryTags.includes(this.state.data.user_data.career.job_title)) {
+            const expectedExperience = card.expected_experience;
+            const userJobTitle = this.data.user_data.career.job_title;
+            const userSalary = this.data.user_data.career.salary;
+            const userExperience = this.data.user_data.career.experience;
+
+            if (primaryTags.includes(userJobTitle)) {
                 career_score += 50;
             }
-            if (secondaryTags.includes(this.state.data.user_data.career.job_title)) {
+            if (secondaryTags.includes(userJobTitle)) {
                 career_score += 20;
             }
+            if (userSalary < salaryMin) {
+                career_score += (salaryMin - userSalary)/200;
+            }
+            else if (userSalary > salaryMax) {
+                career_score -= (userSalary - salaryMax)/200;
+            }
+            else {
+                if  (userSalary > salaryMedian) {
+                    career_score -= (userSalary - salaryMedian)/500;
+                }
+                else {
+                    career_score += (salaryMedian - userSalary)/500;
+                }
+            }
+            if (userExperience < expectedExperience) {
+                career_score -= (expectedExperience - userExperience) * coefficientExperience;
+            }
+            if (userExperience > expectedExperience) {
+                career_score += (userExperience - expectedExperience) * coefficientExperience;
+            }
+            if (userExperience === expectedExperience) career_score += coefficientExperience * 2;
+
             card.career_score = career_score;
+            console.log(career_score);
         });
-        console.log(this.state.data.cards_data);
+        console.log(this.data.cards_data);
+    }
+
+    handleCardClick(id) {
+        let card = find(this.data.cards_data, {id});
+        card.click_count++;
     }
 
     componentWillMount() {
         const storedData = JSON.parse(localStorage.getItem("storedData"));
         if (storedData) {
             console.log(storedData);
-            //this.data.user_data = storedData;
+            this.data.user_data = storedData;
         }
     }
 
@@ -126,16 +165,22 @@ class App extends Component {
                                     render={() =>
                                         this.state.isFinishedCareerEnter ? (
                                             <WorkEnvironmentPage
-                                                data={this.state.data}
+                                                data={this.data}
                                                 onDataChange={
                                                     this.handleDataChange
+                                                }
+                                                onCardClick={
+                                                    this.handleCardClick
                                                 }
                                             />
                                         ) : (
                                             <CareerPage
-                                                data={this.state.data}
+                                                data={this.data}
                                                 onDataChange={
                                                     this.handleDataChange
+                                                }
+                                                onCardClick={
+                                                    this.handleCardClick
                                                 }
                                             />
                                         )
@@ -146,8 +191,9 @@ class App extends Component {
                                     path="/arbetsmiljo"
                                     render={() => (
                                         <WorkEnvironmentPage
-                                            data={this.state.data}
+                                            data={this.data}
                                             onDataChange={this.handleDataChange}
+                                            onCardClick={this.handleCardClick}
                                         />
                                     )}
                                 />
@@ -156,8 +202,9 @@ class App extends Component {
                                     path="/fortroendevald"
                                     render={() => (
                                         <ElectedPage
-                                            data={this.state.data}
+                                            data={this.data}
                                             onDataChange={this.handleDataChange}
+                                            onCardClick={this.handleCardClick}
                                         />
                                     )}
                                 />
@@ -166,9 +213,10 @@ class App extends Component {
                                     path="/articles"
                                     render={(match) => (
                                         <ArticlePage
-                                            data={this.state.data}
+                                            data={this.data}
                                             match={match.match}
                                             articles_data={articles_data}
+                                            onCardClick={this.handleCardClick}
                                         />
                                     )}
                                 />
@@ -182,12 +230,14 @@ class App extends Component {
                                     path="/profil"
                                     render={() => (
                                         <Profile
-                                            data={this.state.data}
+                                            data={this.data}
                                             onDataChange={this.handleDataChange}
+                                            onCardClick={this.handleCardClick}
                                         />
                                     )}
                                 />
                             </Switch>
+                            <Footer />
                         </div>
                     </Router>
                 </main>

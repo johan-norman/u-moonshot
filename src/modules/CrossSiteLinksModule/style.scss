@@ -5,28 +5,47 @@
     align-content: stretch;
   }
   .image-box {
-  	position: relative;
-    background: rgba(0,0,0,.5);
+      background: rgba(0,0,0,.5);
     background-position: center;
     background-size: cover;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  justify-content: center;
-    &:after {
-    	content: '';
-    	position: absolute;
-    	top: 0;
-    	right: 0;
-    	bottom: 0;
-    	left: 0;
-    	background: rgba(26,26,29,.4);
-    	z-index: 1;
+    a {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(26,26,29,.4);
+        z-index: 1;
+        transition: all .15s;
+      }
+      &:focus {
+        outline: none;
+        border: none;
+      }
+      &:active {
+        outline: none;
+        border: none;
+      }
+      &:hover {
+        &:after {
+          background: rgba(26,26,29,.15);
+        }
+      }
     }
+  	
   }
   .image-box-content {
     color: #fff;
     text-align: center;
+    position: relative;
+    z-index: 99;
     span {
     	font-size: calc(12px + 0.5vw);
     	font-weight: 700;

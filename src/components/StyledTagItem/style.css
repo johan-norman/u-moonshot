@@ -16,6 +16,11 @@
 	opacity: 1;
 }
 
+.styled-tag-item.hovered {
+	border: 1px solid #026966;
+	opacity: 1;
+}
+
 .styled-tag-item.active {
 	background: #026966;
 	color: #fff;

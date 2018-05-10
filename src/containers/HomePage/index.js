@@ -22,22 +22,7 @@ const HomePage = props => (
     <HeroVideoModule />
     <CrossSiteLinks />
     <StartPageInteraction />
-    <NewMemberModule inverted={true} title="Lorem ipsum dolor sit amet" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
   </section>
 )
-
-const mapStateToProps = state => ({
-  count: state.counter.count,
-  isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing
-})
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
-  changePage: () => push('/about-us')
-}, dispatch)
 
 export default HomePage;

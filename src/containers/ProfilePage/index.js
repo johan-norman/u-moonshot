@@ -6,6 +6,7 @@ import WorkEnvironmentInteraction from '../../modules/WorkEnvironmentInteraction
 import ElectedInteraction from '../../modules/ElectedInteraction'
 import CareerInteraction from '../../modules/CareerInteraction'
 import RecommendationCards from '../../modules/RecommendationCards'
+import RecommendedTag from '../../components/RecommendedTag'
 import CardSlider from '../../modules/CardSlider'
 import FullSizeSlider from '../../modules/FullSizeSlider'
 import PageTitle from '../../components/PageTitle'
@@ -23,11 +24,7 @@ export class ProfilePage extends Component {
 
   handleDataChange(key, payload) {
     this.props.onDataChange(key, payload);
-  }
-
-  componentWillReceiveProps(oldProps, newProps) {
-  	console.log(oldProps);
-  	console.log(newProps);
+    this.forceUpdate();
   }
 
   render() {
@@ -74,7 +71,10 @@ export class ProfilePage extends Component {
         </div>
          <div id="profile-recommendation" className="profile-section">
          	<Container>
-         		<RecommendationCards data={this.props.data} rows={2} columns={4}></RecommendationCards>
+         		<RecommendedTag>Du har läst</RecommendedTag>
+         		<RecommendationCards data={this.props.data} rows={1} columns={4} sortBy="click" onCardClick={this.props.onCardClick}></RecommendationCards>
+         		<RecommendedTag>Rekommenderas för dig</RecommendedTag>
+         		<RecommendationCards data={this.props.data} rows={1} columns={4} sortBy="all" onCardClick={this.props.onCardClick}></RecommendationCards>
          	</Container>
          </div>
       </div>

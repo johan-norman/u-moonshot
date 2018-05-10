@@ -9,28 +9,49 @@ export class RecommendationCards extends Component {
 	static defaultProps = {
 		columns: 4,
 		rows: 2,
-		sortBy: 'work_environment'
+		sortBy: 'environment'
 	}
 	constructor(props) {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick(id) {
-		console.log(id);
+		this.props.onCardClick(id);
 	}
 	renderRows() {
 		const columnsCount = this.props.columns;
 		const totalCards = columnsCount * this.props.rows;
 		const CardsData = this.props.data.cards_data;
+		const UserData = Object.assign({}, this.props.data.user_data.elected);
+		const UserCareerData = Object.assign({}, this.props.data.user_data.career);
 		const tags =  this.props.data.user_data.work_environment.tags;
+		const sortBy = this.props.sortBy;
 		let SelectedTags = tags.map(tag => {
 		  if (tag.active) return tag.title;
 		});
 		let CardsDataScored = CardsData.map(function(card) {
 		  let score = 0;
-		  card.tags.forEach(tag => {
-		    if (SelectedTags.includes(tag)) score++;
-		  })
+		  if (sortBy === 'career' || sortBy === 'all') {
+		  	//if (card.work_tags_primary.includes(UserCareerData.job_title)) score+=40;
+		  	//if (card.work_tags_secondary.includes(UserCareerData.job_title)) score+=20;
+		  	score += card.career_score;
+		  }
+		  if (sortBy === 'environment' || sortBy === 'all') {
+			card.tags.forEach(tag => {
+				if (SelectedTags.includes(tag)) score+=10;
+			})
+		  }
+		  if (sortBy === 'elected' || sortBy === 'all') {
+			score += UserData.work_environment_value * card.scores.work_environment_value;
+			score += UserData.equality_value * card.scores.equality_value;
+			score += UserData.workplace_interest_value * card.scores.workplace_interest_value;
+			score += UserData.impact_value * card.scores.impact_value;
+			score += UserData.safe_workspace_value * card.scores.safe_workspace_value;
+		  }
+		  if (sortBy === 'click') {
+			score += card.click_count;
+		  }
+		  //console.log(score);
 		  let ScoredCard = Object.assign({}, card);
 		  ScoredCard.score = score;
 		  return ScoredCard;

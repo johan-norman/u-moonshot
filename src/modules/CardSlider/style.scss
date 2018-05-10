@@ -1,3 +1,36 @@
+.cards-slider {
+  position: relative;
+  margin: 50px 0;
+  &:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 2000px;
+    left: -2000px;
+    background: #ffffff;
+    z-index: 99;
+  }
+  .slick-slider {
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    padding-top: 100px;
+    .slick-slide {
+      padding: 0 15px;
+    }
+  }
+  .slick-slider .slick-arrow.slick-prev {
+    top: 0;
+    left: 15px;
+  }
+  .slick-slider .slick-arrow.slick-next {
+    top: 0;
+    left: 93px;
+  }
+  .slick-slider .slick-arrow {
+    width: 76px;
+    height: 76px;
+  }
+}
 .slider-container {
 	overflow: hidden;
   padding: 0 10% 100px 10%;
@@ -102,8 +135,9 @@
 
 .slider-card {
 	.card-image {
-    background: #EAEAEA;
+    background-color: #EAEAEA;
     height: 320px;
+    display: block;
   }
 
   .card-text-container {
@@ -122,9 +156,10 @@
 }
 
  .cards-slider {
+
  	.slick-slide {
 	    float: left;
-	    margin-right: 15px;
+
 	  }
     .slick-list {
     	overflow: visible;

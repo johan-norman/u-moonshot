@@ -3,8 +3,9 @@
 }
 
 .styled-card  .card-image {
+	background-size: cover;
 	display: block;
-	background: #EAEAEA;
+	background-color: #EAEAEA;
 	height: 320px;
 }
 

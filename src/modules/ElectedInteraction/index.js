@@ -14,6 +14,8 @@ import Preamble from '../../components/Preamble'
 import RangeSlider from '../../components/RangeSlider'
 import Tooltip from '../../components/Tooltip'
 
+import RecommendationCards from '../RecommendationCards'
+
 import orderBy from 'lodash/orderBy'
 import debounce from 'lodash/debounce'
 
@@ -37,56 +39,55 @@ class ElectedInteraction extends React.Component{
   }
 
   componentDidMount() {
+    if (!this.props.data.user_data.elected.user_entered_data) {
+      const oldState = this.state;
+      const self = this;
+      let count = 0;
+      const work_environment_value = Array.from({length: 3}, () => this.getRandomInt(0, 10));
+      const equality_value = Array.from({length: 3}, () => this.getRandomInt(0, 10));
+      const workplace_interest_value = Array.from({length: 3}, () => this.getRandomInt(0, 10));
+      const impact_value = Array.from({length: 3}, () => this.getRandomInt(0, 10));
+      const safe_workspace_value = Array.from({length: 3}, () => this.getRandomInt(0, 10));
+      function myFunction() {
+          count++;
+          if(count > 2) {
+            self.setState(oldState);
+            clearInterval(timeout);
+          }
+          else {
+            self.setState({
+              work_environment_value: safe_workspace_value[count],
+              equality_value: equality_value[count],
+              safe_workspace_value: safe_workspace_value[count],
+              impact_value: impact_value[count],
+              safe_workspace_value: safe_workspace_value[count]
+            }); 
+            self.handleDataChange(
+              'elected',
+              {
+                work_environment_value: safe_workspace_value[count],
+                equality_value: equality_value[count],
+                safe_workspace_value: safe_workspace_value[count],
+                impact_value: impact_value[count],
+                safe_workspace_value: safe_workspace_value[count]
+              },
+            ); 
+          }
+      }
+      const timeout = setInterval(myFunction, 1500);
+    }
   }
+  
+  getRandomInt(min, max) {
+      if (max < min) {
+          // Swap min and max
+          [min, max] = [min, max];
+      }
 
-  renderCards(data) {
-    var groupSize = 2;
-    const CardsData = data.cards_data;
-    const UserData = Object.assign({}, data.user_data.elected, this.state);
-    //console.log(UserData);
-    let CardsDataScored = CardsData.map(function(card) {
-      let score = 0;
-      score += UserData.work_environment_value * card.scores.work_environment_value;
-      score += UserData.equality_value * card.scores.equality_value;
-      score += UserData.workplace_interest_value * card.scores.workplace_interest_value;
-      score += UserData.impact_value * card.scores.impact_value;
-      score += UserData.safe_workspace_value * card.scores.safe_workspace_value;
-      let ScoredCard = Object.assign({}, card);
-      ScoredCard.score = score;
-      return ScoredCard;
-    });
-    console.log(CardsDataScored.score);
-    CardsDataScored = orderBy(CardsDataScored, 'score', 'desc')
-    let waitCounter = 1;
-    var rows = CardsDataScored.map(function(card, index) {
-        if (index > 3) return;
-        waitCounter++;
-        // map content to html elements
-        return(
-          <DelayedComponent wait={waitCounter*110} key={card.title + index}>
-          <Box width={300} mx={"8px"}>
-            <StyledCard key={card.title + index}>
-                <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
-                <div className="card-text-container">
-                  <p className="category-text">{card.category}</p>
-                  <h3>{card.title}</h3>
-                </div>
-            </StyledCard>
-          </Box>
-          </DelayedComponent>
-        )
-    }).reduce(function(r, element, index) {
-        // create element groups with size 3, result looks like:
-        // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
-        index % groupSize === 0 && r.push([]);
-        r[r.length - 1].push(element);
-        return r;
-    }, []).map(function(rowContent) {
-        // surround every group with 'row'
-        return <Flex>{rowContent}</Flex>;
-    });
-    return <div className="cards-container">{rows}</div>;
-}
+      // Generate random number n, where min <= n <= max
+      let range = max - min + 1;
+      return Math.floor(Math.random() * range) + min;
+  }
 
   handleClick = index => {
 
@@ -187,7 +188,7 @@ class ElectedInteraction extends React.Component{
     const Cards = this.props.showCards ? (
       <Box width={1/2} mt={120}>
         <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-        {this.renderCards(this.props.data)}
+        <RecommendationCards data={this.props.data} rows={2} columns={2} sortBy="elected" onCardClick={this.props.onCardClick}></RecommendationCards>
       </Box>
     ) : (false);
 

@@ -38,7 +38,8 @@ class CareerPage extends Component {
           <CareerInteraction 
             onDataChange={this.handleDataChange} 
             data={this.props.data}
-            showCards={true}/>
+            showCards={true}
+            onCardClick={this.props.onCardClick}/>
         </Container>
           </HeaderImage>
           <NewMemberModule title="Bli medlem och få lönecoachning" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
