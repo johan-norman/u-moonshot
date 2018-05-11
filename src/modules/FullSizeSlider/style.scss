@@ -117,3 +117,11 @@
     color: #fff;
     margin-top: 0;
   }
+
+  .slick-container {
+    position: relative;
+    .city-tag-wrap {
+      position: absolute;
+      top: 40px;
+    }
+  }

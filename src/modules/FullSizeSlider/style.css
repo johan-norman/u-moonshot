@@ -98,3 +98,9 @@
 .full-size-slider-card h2 {
   color: #fff;
   margin-top: 0; }
+
+.slick-container {
+  position: relative; }
+  .slick-container .city-tag-wrap {
+    position: absolute;
+    top: 40px; }

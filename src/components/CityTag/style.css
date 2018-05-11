@@ -1,0 +1,43 @@
+.city-tag-wrap {
+  position: relative;
+  z-index: 10; }
+  .city-tag-wrap .city-tag {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px 10px 40px;
+    font-size: 17px;
+    color: #b7402f;
+    background-color: #FDB9AF;
+    border: 1px solid #F1978A;
+    border-radius: 33px;
+    box-shadow: 0 0 19px 0 rgba(0, 0, 0, 0.19); }
+    .city-tag-wrap .city-tag:before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 11px;
+      width: 11px;
+      height: 18px;
+      background-image: url("/icon-pin.png"); }
+    .city-tag-wrap .city-tag button {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #b7402f;
+      font-size: 17px;
+      text-decoration: underline;
+      font-style: italic;
+      cursor: pointer; }
+    .city-tag-wrap .city-tag .location-search-input-wrap {
+      z-index: -1;
+      position: absolute;
+      padding-top: 0;
+      bottom: 3px;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 15px;
+      transition: all linear .15s; }
+      .city-tag-wrap .city-tag .location-search-input-wrap.opened {
+        bottom: -33px;
+        padding-top: 25px; }

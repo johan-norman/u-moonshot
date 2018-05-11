@@ -76,6 +76,9 @@ class App extends Component {
                 payload
             );
         }
+        if (key === "city") {
+            this.data.user_data.location = payload;
+        }
         localStorage.setItem("storedData", JSON.stringify(this.data.user_data));
 
         this.data.cards_data.forEach(card => {

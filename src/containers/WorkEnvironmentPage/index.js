@@ -23,6 +23,7 @@ export class WorkEnvironmentPage extends Component {
 
   handleDataChange(key, payload) {
     this.props.onDataChange(key, payload);
+    this.forceUpdate();
   }
 
 
@@ -42,7 +43,11 @@ export class WorkEnvironmentPage extends Component {
         </HeaderImage>
         <NewMemberModule color="light" title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
         <CardSlider cards={this.props.data.cards_data}  onCardClick={this.props.onCardClick}/>
-        <FullSizeSlider cards={this.props.data.cards_data} />
+        <FullSizeSlider 
+            cards={this.props.data.cards_data} 
+            location={this.props.data.user_data.location} 
+            onDataChange={this.handleDataChange} 
+          />
         <CrossSiteLinks />
       </PageContainer>
     );

@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Slider from 'react-slick'
 import RightArrow from './right-arrow.svg'
 import H2 from '../../components/H2'
+import Container from '../../components/Container'
+import CityTag from '../../components/CityTag'
 
 import './default.css';
 import './style.css';
@@ -11,9 +13,23 @@ class FullSizeSlider extends React.Component{
 
   constructor(props){
     super(props);
+    this.state = {
+      location: this.props.location
+    }
+    this.handleDataChange = this.handleDataChange.bind(this);
   }
 
   componentDidMount() {
+  }
+
+  handleDataChange(key, payload) {
+    this.props.onDataChange(key, payload);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      location: newProps.location
+    })
   }
 
   render() {
@@ -41,6 +57,12 @@ class FullSizeSlider extends React.Component{
 
     return(
       <div className="slick-container">
+      <Container>
+      <CityTag 
+          onCityChange={this.handleDataChange}
+          active={this.state.location}
+        />
+      </Container>
       <div className="slick-slider">
         <div className="slider-inner-container">
           <Slider {...sliderSettings}>

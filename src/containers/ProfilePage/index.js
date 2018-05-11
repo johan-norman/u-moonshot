@@ -7,6 +7,7 @@ import ElectedInteraction from '../../modules/ElectedInteraction'
 import CareerInteraction from '../../modules/CareerInteraction'
 import RecommendationCards from '../../modules/RecommendationCards'
 import RecommendedTag from '../../components/RecommendedTag'
+import CityTag from '../../components/CityTag'
 import CardSlider from '../../modules/CardSlider'
 import FullSizeSlider from '../../modules/FullSizeSlider'
 import PageTitle from '../../components/PageTitle'
@@ -38,6 +39,10 @@ export class ProfilePage extends Component {
 					  <H3>
 					    Vi vill kunna ge dig så relevant information som möjligt och för att kunna göra det behöver vi veta lite mer om dig.
 					  </H3>
+            <CityTag 
+              onCityChange={this.handleDataChange}
+              active={this.props.data.user_data.location}
+            />
 					</Box>
 				</Flex>
 	        </Container>

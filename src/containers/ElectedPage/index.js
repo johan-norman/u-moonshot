@@ -22,6 +22,7 @@ export class ElectedPage extends Component {
 
   handleDataChange(key, payload) {
     this.props.onDataChange(key, payload);
+    this.forceUpdate();
   }
 
   render() {
@@ -39,7 +40,11 @@ export class ElectedPage extends Component {
         </HeaderImage>
         <NewMemberModule title="Bli medlem och skapa förändring" subtext="Tar du steget till att bli förtroendevald får du coaching, verktyg och utbildningar. Bli medlem idag så bjuder på avgiften i tre månader." />
         <CardSlider cards={this.props.data.cards_data} />
-        <FullSizeSlider cards={this.props.data.cards_data} />
+        <FullSizeSlider 
+            cards={this.props.data.cards_data} 
+            location={this.props.data.user_data.location} 
+            onDataChange={this.handleDataChange} 
+          />
         <CrossSiteLinks />
       </PageContainer>
     );
