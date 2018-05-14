@@ -48,7 +48,7 @@ class WorkEnvironmentInteraction extends React.Component{
             self.setState(newState);
           }
       }
-      const timeout = setInterval(myFunction, 300);
+      const timeout = setInterval(myFunction, 1000);
     }
   }
 

@@ -57,7 +57,7 @@ class CareerInteraction extends React.Component{
             }); 
           }
       }
-      const timeout = setInterval(myFunction, 300);
+      const timeout = setInterval(myFunction, 1000);
     }
   }
 
