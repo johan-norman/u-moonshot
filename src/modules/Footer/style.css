@@ -8,14 +8,20 @@ footer {
   background-repeat: no-repeat; }
   footer a {
     font-size: 22px;
+    font-family: 'Roboto';
+    font-weight: 600;
     color: #ffffff;
     text-decoration: none; }
   footer .footer-box {
-    border-top: 2px solid rgba(255, 255, 255, 0.38);
+    border-top: 1px solid rgba(255, 255, 255, 0.38);
     padding-top: 10px;
     margin-top: 30px; }
     footer .footer-box h4 {
       font-size: 18px;
-      margin: 0 0 5px 0; }
+      color: #FDB9AF;
+      font-weight: 600;
+      margin: 5px 0 5px 0; }
     footer .footer-box p {
-      font-size: 15px; }
+      font-size: 15px;
+      font-weight: 400;
+      margin-top: 5px; }

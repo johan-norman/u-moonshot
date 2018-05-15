@@ -30,7 +30,7 @@ class Button extends React.Component{
   render() {
     return(
       <Link to={this.props.to}>
-        <StyledButton>{this.props.text}</StyledButton>
+        <StyledButton className={this.props.className}>{this.props.text}</StyledButton>
       </Link>
     )
   }

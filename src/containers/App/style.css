@@ -5,13 +5,13 @@ main {
   display: block;
   margin: 0 auto;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff;
   border: 2px solid #ffffff;
   background: transparent;
-  padding: 12px 8px;
+  padding: 9px 8px;
   min-width: 184px;
-  border-radius: 20px;
+  border-radius: 54px;
   margin-top: 50px;
   text-transform: uppercase;
   cursor: pointer; }

@@ -44,6 +44,7 @@ class App extends Component {
         };
         this.data = { user_data: default_data, cards_data: cards_data };
         this.handleDataChange = this.handleDataChange.bind(this);
+        this.handleCardClick = this.handleCardClick.bind(this);
     }
 
     handleDataChange(key, payload, preview) {

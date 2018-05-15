@@ -9,16 +9,32 @@
     background-image: url(/new_member_module_bckg-dark.jpg);
     .tabs-nav {
       background: #FDB9AF;
+      li {
+        color: rgba(65, 65, 64, 0.42);
+      }
+      .react-tabs__tab--selected {
+        color: #484848;
+      }
     }
     button {
       background: #039073;
+      color: #FFD24C;
     }
     .tab {
       button {
         background: transparent;
         border: 2px solid #C6C6C6;
-        color: #000000;
+        color: #323648;
       }
+      p {
+        color: #323648;
+      }
+    }
+    h2 {
+      color: #ffffff;
+    }
+    .new-member-p {
+      color: #ffffff;
     }
   }
   &.light {
@@ -30,13 +46,25 @@
   }
   .new-member-h2 {
     width: 83%;
-    font-size: 48px;
-    letter-spacing: -3px;
+    font-size: 70px;
+    letter-spacing: 0;
+    font-family: 'Roboto';
+    margin-bottom: 30px;
   }
   .new-member-p {
     width: 83%;
+    font-size: 24px;
     margin-top: -15px;
     margin-bottom: 70px;
+  }
+  .cta-section {
+
+  }
+  .cta-button {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 14px 38px;
   }
   .phone-tabs {
     background: #ffffff;
@@ -44,7 +72,7 @@
   .tab-container .tab.react-tabs__tab-panel--selected {
     padding: 50px;
     max-height: 350px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     a {
       color: #484848;
     }
@@ -60,6 +88,7 @@
       box-sizing: border-box;
       font-size: 26px;
       font-weight: bold;
+      font-family: 'Roboto';
       border: none;
       border-bottom: 1px solid #757575;
       background: transparent;
@@ -71,11 +100,14 @@
         outline: none;
       }
       &::placeholder {
-        color: #959595;
+        color: #C4C4C4;
       }
     }
     p {
       font-size: 26px;
+      font-family: 'Roboto';
+      font-weight: 600;
+      margin: 10px 0 40px 0;
     }
     .icon-cellphone {
       position: absolute;
@@ -83,6 +115,14 @@
       width: 18px;
       height: 30px;
       background-image: url(/cellphone-iphone.png);
+    }
+    button {
+      margin-right: 20px;
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+    .small-link {
+      font-size: 15px;
     }
   }
 
@@ -94,7 +134,10 @@
   .tab-content Button {
     margin-right: 25px;
   }
-
+  .tab-container {
+    position: relative;
+    height: 100%;
+  }
   .tabs-nav {
     display: flex;
     justify-content: space-evenly;
@@ -102,11 +145,17 @@
     margin: 0;
     list-style:none;
     padding: 0;
+        position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0px 1px 6px rgba(179, 81, 66, 0.5);
     li {
       line-height: 61px;
       text-decoration: none;
       color: #888A94;
       font-size: 18px;
+      font-weight: 600;
       text-align: center;
       cursor: pointer;
     }

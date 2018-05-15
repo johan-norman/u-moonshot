@@ -44,11 +44,11 @@ class CareerPage extends Component {
         </Container>
           </HeaderImage>
           <NewMemberModule title="Bli medlem och få lönecoachning" subtext="Dessutom ingår inkomstförsäkring som garanterar dig 80% av lönen vid uppsägning. Bli medlem idag så bjuder på avgiften i tre månader." />
-          <CardSlider cards={this.props.data.cards_data} />
           <FullSizeSlider 
             cards={this.props.data.cards_data} 
             location={this.props.data.user_data.location} 
             onDataChange={this.handleDataChange} 
+            onCardClick={this.props.onCardClick}
           />
           <CrossSiteLinks />
       </CareerContainer>

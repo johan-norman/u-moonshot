@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="12px" height="21px" viewBox="0 0 12 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="17px" viewBox="0 0 10 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
     <title>Right_Arrow-path</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Desktop-HD-Copy-20" transform="translate(-379.000000, -1739.000000)" fill="#FFFFFF">
-            <g id="Slider-content" transform="translate(102.000000, 1698.000000)">
-                <g id="arrows" transform="translate(133.000000, 0.000000)">
-                    <path d="M155.521622,52.5216216 L146.383784,61.6594595 C145.92973,62.1135135 145.248649,62.1135135 144.794595,61.6594595 C144.340541,61.2054054 144.340541,60.5243243 144.794595,60.0702703 L153.137838,51.727027 L144.340541,42.9297297 C143.886486,42.4756757 143.886486,41.7945946 144.340541,41.3405405 C144.794595,40.8864865 145.475676,40.8864865 145.92973,41.3405405 L155.521622,50.9324324 C155.975676,51.3864865 155.975676,52.0675676 155.521622,52.5216216 Z" id="Right_Arrow-path"></path>
+        <g id="Karriär" transform="translate(-1396.000000, -2284.000000)" fill="#FFD24C">
+            <g id="big-img-slider" transform="translate(0.000000, 1578.000000)">
+                <g id="arrows" transform="translate(1287.000000, 675.000000)">
+                    <path d="M118.196432,39.9164324 L111.251676,46.8611892 C110.906595,47.2062703 110.388973,47.2062703 110.043892,46.8611892 C109.698811,46.5161081 109.698811,45.9984865 110.043892,45.6534054 L116.384757,39.3125405 L109.698811,32.6265946 C109.35373,32.2815135 109.35373,31.7638919 109.698811,31.4188108 C110.043892,31.0737297 110.561514,31.0737297 110.906595,31.4188108 L118.196432,38.7086486 C118.541514,39.0537297 118.541514,39.5713514 118.196432,39.9164324 Z" id="Right_Arrow-path"></path>
                 </g>
             </g>
         </g>

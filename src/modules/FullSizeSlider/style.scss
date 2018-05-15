@@ -9,6 +9,7 @@
   padding: 0;
   position: relative;
   margin-top: 50px;
+
 }
 
 
@@ -52,12 +53,12 @@
 .slick-slider .slick-arrow:before {
       content: '';
       position: absolute;
-      width: 12px;
-      height: 21px;
+      width: 9px;
+      height: 16px;
       left: 50%;
       top: 50%;
-      margin-top: -10px;
-      margin-left: -6px;
+      margin-top: -8px;
+      margin-left: -4px;
     }
 
 .slick-slider  .slick-arrow.slick-prev {
@@ -108,7 +109,7 @@
 
 .full-size-slider-card  .card-text-container {
     bottom: 20px;
-    left: 30px;
+    left: 0;
     position: absolute;
     color: #fff;
   }
@@ -116,12 +117,25 @@
 .full-size-slider-card  h2 {
     color: #fff;
     margin-top: 0;
+    margin-bottom: 40px;
   }
 
   .slick-container {
     position: relative;
+    .container {
+      position: relative;
+    }
     .city-tag-wrap {
       position: absolute;
       top: 40px;
     }
+    .category-text {
+      color: #FFD24C;
+      font-family: 'Roboto';
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
   }
+
+

@@ -39,11 +39,11 @@ export class ElectedPage extends Component {
         </Container>
         </HeaderImage>
         <NewMemberModule title="Bli medlem och skapa förändring" subtext="Tar du steget till att bli förtroendevald får du coaching, verktyg och utbildningar. Bli medlem idag så bjuder på avgiften i tre månader." />
-        <CardSlider cards={this.props.data.cards_data} />
         <FullSizeSlider 
             cards={this.props.data.cards_data} 
             location={this.props.data.user_data.location} 
             onDataChange={this.handleDataChange} 
+            onCardClick={this.props.onCardClick}
           />
         <CrossSiteLinks />
       </PageContainer>

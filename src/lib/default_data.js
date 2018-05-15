@@ -35,7 +35,7 @@ export const default_data = {
             {id: 25, title: "Träningsmöjligheter", active: false},
             {id: 26, title: "Samhällsansvar", active: false}
         ],
-        user_entered_data: false,
+        user_entered_data: true,
     },
     elected: {
 		work_environment_value: 8,
@@ -43,7 +43,7 @@ export const default_data = {
 		workplace_interest_value: 7,
 		impact_value: 3,
 		safe_workspace_value: 5,
-    user_entered_data: false
+    user_entered_data: true
     },
     work_titles: [
 		"Administratör",

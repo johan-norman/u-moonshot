@@ -87,7 +87,7 @@ class WorkEnvironmentInteraction extends React.Component{
     const Cards = this.props.showCards ? (
       <div>
       <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
-      <RecommendationCards data={this.props.data} rows={2} columns={4} scoreBy='environment' onCardClick={this.props.onCardClick}></RecommendationCards>
+      <RecommendationCards data={this.props.data} rows={1} columns={4} scoreBy='environment' onCardClick={this.props.onCardClick}></RecommendationCards>
       </div>
     ) : (false);
 

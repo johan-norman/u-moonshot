@@ -10,6 +10,7 @@ import H3 from '../../components/H3'
 import Container from '../../components/Container'
 import SentenceFormContainer from '../../components/SentenceFormContainer'
 import RangeSlider from '../../components/RangeSlider'
+import RecommendedTag from '../../components/RecommendedTag'
 import Slider from 'react-rangeslider';
 import RecommendedationCards from '../RecommendationCards';
 
@@ -28,7 +29,7 @@ class CareerInteraction extends React.Component{
       salaryValue: this.props.data.user_data.career.salary,
       workTitle: this.props.data.user_data.career.job_title,
       experienceValue: this.props.data.user_data.career.experience,
-      showRows: 2
+      showRows: 1
     };
 
     this.handleDataChange = debounce(this.handleDataChange.bind(this), 500);
@@ -41,8 +42,16 @@ class CareerInteraction extends React.Component{
       const self = this;
       let count = 0;
       const randomSalaries = Array.from({length: 12}, () => this.getRandomInt(20000, 50000));
-      const randomWorkTitles = Array.from({length: 12}, () => this.getRandomInt(0, 50));
+      let randomWorkTitles = Array.from({length: 50}, () => this.getRandomInt(0, 80));
+      let randomWorkTitlesFiltered = [];
       const randomExperience = Array.from({length: 12}, () => this.getRandomInt(1, 30));
+      let countTitles = 0;
+      randomWorkTitles.forEach((titleIndex) => {
+          if (self.props.data.user_data.work_titles[titleIndex].length < 16 && countTitles<12) {
+            randomWorkTitlesFiltered.push(titleIndex);
+            countTitles++;
+          }
+      });
       function myFunction() {
           count++;
           if(count > 11) {
@@ -52,7 +61,7 @@ class CareerInteraction extends React.Component{
           else {
             self.setState({
               salaryValue: randomSalaries[count],
-              workTitle: self.props.data.user_data.work_titles[randomWorkTitles[count]],
+              workTitle: self.props.data.user_data.work_titles[randomWorkTitlesFiltered[count]],
               experienceValue: randomExperience[count]
             }); 
           }
@@ -174,6 +183,7 @@ class CareerInteraction extends React.Component{
 
     const Cards = this.props.showCards ? (
       <div>
+        <RecommendedTag>Rekommenderas för dig:</RecommendedTag>
         <RecommendedationCards data={this.props.data} rows={this.state.showRows} columns={4} sortBy='career' onCardClick={this.props.onCardClick}></RecommendedationCards>
         <button className="load-more-button" onClick={this.showMore}>Visa fler</button>
       </div>

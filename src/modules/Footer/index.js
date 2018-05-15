@@ -28,8 +28,8 @@ const Footer = () => {
 					</Box>
 					<Box width={[1, 1/4, 1/5, 1/5]} className="footer-box">
 						<Link to="/profil">
-							<h4>Mina val</h4>
-							<p>Se de valen du har gjort.</p>
+							<h4>Kontakta mig</h4>
+							<p>Vill du att vi kontaktar dig?.</p>
 						</Link>
 					</Box>
 				</Flex>

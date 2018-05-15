@@ -30,7 +30,7 @@ class NewMemberModule extends React.Component{
           <Box width={[1, 1/2, 3/5]}>
             <h2 className="new-member-h2">{this.props.title}</h2>
             <p className="new-member-p">{this.props.subtext}</p>
-            <Button to="/bli-medlem" text="Bli medlem" />
+            <Button className="cta-button" to="/bli-medlem" text="Bli medlem" />
           </Box>
           <Box width={[1, 1/2, 2/5]} className="phone-tabs">
             <Tabs className="tab-container">
@@ -38,13 +38,13 @@ class NewMemberModule extends React.Component{
                   <p>Fyll i ditt nummer så ringer vi upp och berättar allt</p>
                   <div className="input-wrap"><i className="icon-cellphone"></i><input type="tel" placeholder="T.ex: 070 123 45 678" /></div>
                   <Button to="/bli-medlem" text="Ring upp mig" />
-                  <a href="#">Få mail istället?</a>
+                  <a className="small-link" href="#">Få mail istället?</a>
                 </TabPanel>
                 <TabPanel className="tab">
                   <p>Fyll i ditt nummer så ringer vi upp och berättar allt</p>
                   <div className="input-wrap"><i className="icon-cellphone"></i><input type="tel" placeholder="T.ex: 070 123 45 678" /></div>
                   <Button to="/bli-medlem" text="Ring upp mig" />
-                  <a href="#">Få mail istället?</a>
+                  <a className="small-link" href="#">Få mail istället?</a>
                 </TabPanel>
                 <TabPanel className="tab">
                   <p>Follow us</p>

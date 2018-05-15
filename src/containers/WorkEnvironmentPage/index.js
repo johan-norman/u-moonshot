@@ -42,11 +42,11 @@ export class WorkEnvironmentPage extends Component {
         </Container>
         </HeaderImage>
         <NewMemberModule color="light" title="Bli medlem och få råd och stöd" subtext="Vid juridiska tvister kan du dessutom få hjälp av en förhandlingsexpert. Bli medlem idag så bjuder på avgiften i tre månader." />
-        <CardSlider cards={this.props.data.cards_data}  onCardClick={this.props.onCardClick}/>
         <FullSizeSlider 
             cards={this.props.data.cards_data} 
             location={this.props.data.user_data.location} 
             onDataChange={this.handleDataChange} 
+            onCardClick={this.props.onCardClick}
           />
         <CrossSiteLinks />
       </PageContainer>

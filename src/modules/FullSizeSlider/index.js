@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import styled from 'styled-components'
 import Slider from 'react-slick'
 import RightArrow from './right-arrow.svg'
@@ -17,6 +18,7 @@ class FullSizeSlider extends React.Component{
       location: this.props.location
     }
     this.handleDataChange = this.handleDataChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +26,10 @@ class FullSizeSlider extends React.Component{
 
   handleDataChange(key, payload) {
     this.props.onDataChange(key, payload);
+  }
+
+  handleClick(id) {
+    this.props.onCardClick(id);
   }
 
   componentWillReceiveProps(newProps) {
@@ -46,11 +52,13 @@ class FullSizeSlider extends React.Component{
     const renderCards = this.props.cards.map((card, index) => {
       return (
           <div className="full-size-slider-card" key={card.title + index}>
-            <div className="card-text-container">
-              <p className="category-text">{card.category}</p>
-              <H2>{card.title}</H2>
-            </div>
-            <div className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></div>
+            <Link to={`/articles/${card.id}`}  onClick={() => this.handleClick(card.id)} className="card-image" style={ { backgroundImage: `url(${ card.imgsrc })` } }></Link>
+            <Container>
+              <div className="card-text-container">
+                <p className="category-text">{card.category}</p>
+                <H2>{card.title}</H2>
+              </div>
+            </Container>
           </div>
       );
     })

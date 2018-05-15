@@ -1,2 +1,7 @@
-.question-label .tooltip-wrap {
-  float: right; }
+.question-label {
+  color: #ffffff; }
+  .question-label .tooltip-wrap {
+    float: right; }
+
+.preamble {
+  opacity: 1; }
